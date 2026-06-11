@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quick Start Guide — DraftX</title>
+<meta name="description" content="Install DraftX, activate your key and run your first job — from SolidWorks assembly to sorted, nest-ready drawings in about 15 minutes."/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  :root{
+    --bg:#07070f; --bg2:#0a0a14; --card:#0e0e1a; --card2:#12121f;
+    --border:#1e1e38; --border2:#2a2a4a;
+    --text:#e2e8f0; --muted:#94a3b8; --faint:#64748b;
+    --blue:#3b82f6; --blue-d:#2563eb; --blue-l:#60a5fa;
+    --amber:#f59e0b; --green:#34d399;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7}
+  a{color:var(--blue-l);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:sticky;top:0;z-index:100;background:rgba(7,7,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:28px;padding:16px 24px;max-width:1140px;margin:0 auto}
+  .wordmark{font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--text)}
+  .wordmark b{color:var(--blue)}
+  .nav-links{margin-left:auto;display:flex;gap:24px}
+  .nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+  .doc{max-width:880px;margin:0 auto;padding:70px 24px 90px}
+  .doc h1{font-size:36px;font-weight:800;letter-spacing:-.01em;margin-bottom:10px}
+  .lede{color:var(--muted);font-size:18px;margin-bottom:8px}
+  .meta{color:var(--faint);font-size:14px;margin-bottom:46px}
+  .doc h2{font-size:24px;font-weight:800;margin:54px 0 16px;display:flex;align-items:center;gap:14px}
+  .doc h3{font-size:17px;font-weight:700;margin:26px 0 10px}
+  .doc p{color:var(--muted);margin-bottom:14px}
+  .doc ul,.doc ol{color:var(--muted);margin:0 0 14px 22px}
+  .doc li{margin-bottom:8px}
+  .doc strong{color:var(--text)}
+  .stepnum{flex:none;width:38px;height:38px;border-radius:50%;background:var(--card);border:2px solid var(--blue);color:var(--blue-l);font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .callout{background:var(--card);border:1px solid var(--border2);border-left:3px solid var(--blue);border-radius:10px;padding:16px 20px;margin:22px 0}
+  .callout.green{border-left-color:var(--green)}
+  .callout.amber{border-left-color:var(--amber)}
+  .callout p{margin-bottom:4px}
+  .shot{display:block;width:100%;border:1px solid var(--border2);border-radius:12px;margin:18px 0 26px;cursor:zoom-in}
+  .kbd{display:inline-block;background:var(--card2);border:1px solid var(--border2);border-radius:6px;padding:1px 9px;font-size:13.5px;color:var(--text);font-weight:600;white-space:nowrap}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 26px}
+  .flow span{background:var(--card);border:1px solid var(--border2);border-radius:99px;padding:7px 16px;font-size:13.5px;font-weight:600;color:var(--text)}
+  .flow i{color:var(--faint);font-style:normal}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border:1px solid var(--border);color:var(--muted);vertical-align:top}
+  th{background:var(--card);color:var(--text);font-weight:600}
+  code{background:var(--card2);border:1px solid var(--border);border-radius:5px;padding:1px 7px;font-size:13.5px;color:var(--blue-l)}
+  footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;color:var(--faint);font-size:14px}
+  #lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:300;align-items:center;justify-content:center;cursor:zoom-out;padding:30px}
+  #lightbox img{max-width:100%;max-height:100%;border-radius:8px}
+  @media print{
+    nav,#lightbox,footer{display:none}
+    body{background:#fff;color:#111}
+    .doc p,.doc li,.lede{color:#333}
+    .doc h2{color:#111}
+    .callout,.flow span{background:#f5f5f5;border-color:#ddd}
+    .stepnum{border-color:#2563eb;color:#2563eb;background:#fff}
+    .shot{border-color:#ccc}
+    code,.kbd{background:#f0f0f0;border-color:#ddd;color:#111}
+    th,td{border-color:#ccc;color:#333}
+    th{background:#f5f5f5;color:#111}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="wordmark">Draft<b>X</b></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#install">Install</a>
+      <a href="#activate">Activate</a>
+      <a href="#firstjob">First job</a>
+      <a href="#tabs">Tabs</a>
+      <a href="#it">For IT</a>
+      <a href="mailto:sales@opusag.co.uk">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="doc">
+  <h1>Quick Start Guide</h1>
+  <p class="lede">From download to your first sorted, nest-ready job in about 15 minutes.</p>
+  <div class="meta">OpusAg Ltd &middot; DraftX for Windows &middot; Print this page for a desk copy</div>
+
+  <h2 id="before"><span class="stepnum">0</span> Before you start</h2>
+  <ul>
+    <li><strong>Windows 10 or 11</strong>, 64-bit.</li>
+    <li><strong>SolidWorks</strong> installed and licensed on the same machine (needed for the Job Pack and Batch Export steps; viewing, sorting and reporting work without it).</li>
+    <li>A <strong>licence or trial key</strong> from OpusAg &mdash; request one at <a href="mailto:sales@opusag.co.uk">sales@opusag.co.uk</a>.</li>
+    <li>Outbound HTTPS access for licence validation (see <a href="#it">For IT</a>). No server, no database, no inbound ports.</li>
+  </ul>
+
+  <h2 id="install"><span class="stepnum">1</span> Install</h2>
+  <ol>
+    <li>Download the latest installer: <a href="https://draftx-license-server-production.up.railway.app/download/latest"><strong>Download DraftX for Windows</strong></a>.</li>
+    <li>Run <span class="kbd">DraftX Setup x.x.x.exe</span>, accept the licence agreement, and choose an install location (per-user by default &mdash; no admin rights needed).</li>
+    <li>DraftX launches when setup finishes and keeps itself up to date automatically.</li>
+  </ol>
+  <div class="callout amber">
+    <p><strong>If Windows SmartScreen appears</strong> ("Windows protected your PC"), click <span class="kbd">More info</span> &rarr; <span class="kbd">Run anyway</span>. This warning fades as a new publisher builds reputation with Microsoft.</p>
+  </div>
+
+  <h2 id="activate"><span class="stepnum">2</span> Activate</h2>
+  <ol>
+    <li>On first launch DraftX asks for your <strong>licence key</strong>. Paste it in and activate.</li>
+    <li>The key binds to this machine automatically. If your key allows multiple machines, repeat on each one.</li>
+    <li>On a <strong>trial key</strong> you'll see a countdown pill in the header showing days remaining &mdash; everything is fully unlocked until it expires.</li>
+  </ol>
+  <div class="callout">
+    <p><strong>Replacing a PC?</strong> Email <a href="mailto:sales@opusag.co.uk">sales@opusag.co.uk</a> and we'll release the old machine so you can activate the new one. Brief internet outages are fine &mdash; DraftX keeps working through a 72-hour offline grace period.</p>
+  </div>
+
+  <h2 id="firstjob"><span class="stepnum">3</span> Your first job &mdash; let Guided mode drive</h2>
+  <p>DraftX starts in <strong>Guided mode</strong>: tabs unlock in workflow order and a bouncing arrow always points at your next step. You can't get lost &mdash; locked tabs explain what to do first when clicked. (Switch to Free mode any time with the toggle in the header.)</p>
+  <div class="flow">
+    <span>Jobs</span><i>&rarr;</i><span>Job Pack</span><i>&rarr;</i><span>Batch Export</span><i>&rarr;</i><span>Sort Drawings</span><i>&rarr;</i><span>QC &amp; everything else</span>
+  </div>
+
+  <h3>3.1 Create the job</h3>
+  <p>On the <strong>Jobs</strong> tab, create or select the job you're working on. This sets the job folder every later step writes into.</p>
+  <img class="shot" src="screenshots/jobs.png" alt="Jobs tab" onclick="lbOpen(this)"/>
+
+  <h3>3.2 Run Job Pack</h3>
+  <p>On the <strong>Job Pack</strong> tab, click <span class="kbd">Detect from assembly</span> with your top-level SolidWorks assembly open (or browse to it). Once the model is set, <span class="kbd">Run Job Pack</span> lights up &mdash; click it and DraftX walks the assembly, gathers parts, quantities and materials, and builds the job structure.</p>
+  <img class="shot" src="screenshots/jobpack.png" alt="Job Pack tab" onclick="lbOpen(this)"/>
+
+  <h3>3.3 Batch Export</h3>
+  <p>On the <strong>Batch Export</strong> tab, export every drawing to PDF (and DXF for flat parts) in one run. DraftX drives SolidWorks for you &mdash; go and make a brew.</p>
+  <img class="shot" src="screenshots/batchpdf.png" alt="Batch Export tab" onclick="lbOpen(this)"/>
+
+  <h3>3.4 Sort Drawings</h3>
+  <p>On the <strong>Sort Drawings</strong> tab, DraftX classifies every exported drawing &mdash; laser, fold, machine, fabrication, bought-out and more &mdash; into a clean folder structure. With <a href="#ai">AI sorting</a> enabled it reads the drawings like a person would; without it, rule-based sorting still does the heavy lifting.</p>
+  <img class="shot" src="screenshots/sort.png" alt="Sort Drawings tab" onclick="lbOpen(this)"/>
+
+  <h3>3.5 The app is now yours</h3>
+  <p>After sorting, every tab unlocks and the arrow disappears &mdash; from here the order is up to you. The next section walks each tab in the order most shops use them.</p>
+
+  <h2 id="tabs"><span class="stepnum">4</span> The tabs, one by one</h2>
+
+  <h3>4.1 Review Queue &mdash; confirm the AI's uncertain calls</h3>
+  <p>Anything the classifier wasn't confident about lands here instead of being filed silently &mdash; the tab shows a count badge when there's something waiting. Each drawing is shown with its suggested category; click the correct one and DraftX re-files the drawing instantly. An empty queue means every drawing was sorted with high confidence.</p>
+
+  <h3>4.2 QC Report &mdash; prove the job is complete</h3>
+  <p>The QC Report cross-checks the assembly BOM against what was actually exported and sorted: every part, its quantity, whether it has a drawing, whether flat parts have a DXF, and where it was filed. Work down anything flagged before releasing the job &mdash; this is the "nothing missing, nothing duplicated" gate. From here you can also <span class="kbd">Generate</span> nest-ready files and jump straight on with <span class="kbd">Go to NestX &rarr;</span>.</p>
+  <img class="shot" src="screenshots/qc.png" alt="QC Report tab" onclick="lbOpen(this)"/>
+
+  <h3>4.3 Drawing Review &mdash; eyeball every sheet, fast</h3>
+  <p>Full-screen, keyboard-driven flick-through of the job's drawings &mdash; the digital version of leafing through a job pack, without the printing. Step through sheet by sheet, zoom in on details, and flag anything that needs a second look before it reaches the shop floor.</p>
+  <img class="shot" src="screenshots/drwreview.png" alt="Drawing Review tab" onclick="lbOpen(this)"/>
+
+  <h3>4.4 DXF Editor &mdash; clean up flat patterns</h3>
+  <p>Open any exported DXF and tidy it before nesting &mdash; without a trip back through CAD. Useful for stripping stray geometry or checking a flat pattern is exactly what the laser will see.</p>
+
+  <h3>4.5 Job Card &mdash; production paperwork in one click</h3>
+  <p>Pick the job, check the snapshot preview, and hit <span class="kbd">Generate PDF</span>. You get a branded job card with the assembly snapshot, part counts and job details &mdash; ready for the office wall or the folder that travels with the job.</p>
+  <img class="shot" src="screenshots/jcard.png" alt="Job Card tab" onclick="lbOpen(this)"/>
+
+  <h3>4.6 Batch Print &mdash; paper for the shop floor</h3>
+  <p>Browse the sorted job folders, build a print queue (whole categories or hand-picked drawings), check the preview, and send the lot to the printer in one go &mdash; no more opening PDFs one at a time.</p>
+  <img class="shot" src="screenshots/print.png" alt="Batch Print tab" onclick="lbOpen(this)"/>
+
+  <h3>4.7 NestX &mdash; straight into Lantek</h3>
+  <p>NestX pushes the job's laser parts into your Lantek database without manual re-entry. It's a numbered flow, top to bottom:</p>
+  <ol>
+    <li><strong>Select Job Folder</strong> &mdash; point at the sorted job.</li>
+    <li><strong>Parts Review</strong> &mdash; check parts, quantities and materials; exclude anything you don't want nested.</li>
+    <li><strong>Import New Parts into Lantek</strong> &mdash; new geometry goes into the Lantek database.</li>
+    <li><strong>Create Job or Kit in Lantek</strong> &mdash; one click builds the Lantek job (or kit) ready for nesting.</li>
+  </ol>
+  <img class="shot" src="screenshots/nestx.png" alt="NestX tab" onclick="lbOpen(this)"/>
+
+  <h3>4.8 Analytics &mdash; the numbers for whoever signs the invoices</h3>
+  <p>Dashboard, time savings and benchmarks built from your real jobs: hours saved per operation, money saved at your labour rate, parts processed, and how jobs compare. This is the tab to open when someone asks what DraftX is actually worth.</p>
+  <img class="shot" src="screenshots/analytics.png" alt="Analytics tab" onclick="lbOpen(this)"/>
+
+  <h3>4.9 Settings &mdash; set once, forget</h3>
+  <p>Everything configurable lives here: job drawings root folder, folder naming and templates, export method, branding for job cards, the Lantek database connection for NestX, AI provider credentials, and the minutes-saved figures behind Analytics. For a first install, set the <strong>Job Drawings Root</strong> and you're off &mdash; the rest has sensible defaults.</p>
+
+  <h2 id="ai"><span class="stepnum">5</span> Optional: switch on AI sorting</h2>
+  <p>AI sorting reads each drawing image and classifies it with near-human judgement. It's off until you add <strong>your own</strong> credentials in <span class="kbd">Settings</span>:</p>
+  <table>
+    <tr><th></th><th>Anthropic (direct API)</th><th>AWS Bedrock</th></tr>
+    <tr><td><strong>You need</strong></td><td>An Anthropic API key</td><td>An AWS account with Bedrock access keys</td></tr>
+    <tr><td><strong>Data processed in</strong></td><td>United States</td><td><strong>UK/EU</strong> (London region, EU inference)</td></tr>
+    <tr><td><strong>Best for</strong></td><td>Fastest setup</td><td>Data-residency requirements</td></tr>
+  </table>
+  <div class="callout green">
+    <p>Either way, drawing images go <strong>directly from your machine to your own provider account</strong> &mdash; never through OpusAg &mdash; and neither provider trains models on API inputs. Details in the <a href="privacy.html">privacy policy</a>.</p>
+  </div>
+
+  <h2 id="it"><span class="stepnum">6</span> For IT</h2>
+  <ul>
+    <li><strong>Footprint:</strong> per-user Windows desktop app. No admin install, no server, no database, no inbound connections.</li>
+    <li><strong>Data:</strong> drawings, models and job data stay on your machines and network shares. OpusAg receives licence-admin data only (see <a href="privacy.html">privacy policy</a>).</li>
+    <li><strong>Outbound HTTPS (443) to allow:</strong></li>
+  </ul>
+  <table>
+    <tr><th>Destination</th><th>Purpose</th></tr>
+    <tr><td><code>draftx-license-server-production.up.railway.app</code></td><td>Licence validation (72-hour offline grace if unreachable)</td></tr>
+    <tr><td><code>github.com</code> / <code>*.githubusercontent.com</code></td><td>Automatic updates and installer downloads</td></tr>
+    <tr><td><code>api.anthropic.com</code> <em>(only if AI sorting via Anthropic)</em></td><td>AI drawing classification</td></tr>
+    <tr><td><code>bedrock-runtime.eu-west-2.amazonaws.com</code> <em>(only if AI via Bedrock)</em></td><td>AI drawing classification, UK/EU residency</td></tr>
+  </table>
+
+  <h2 id="help"><span class="stepnum">7</span> Troubleshooting</h2>
+  <table>
+    <tr><th>Symptom</th><th>Fix</th></tr>
+    <tr><td>"Licence can't be validated"</td><td>Check the licence server domain isn't blocked by firewall/proxy. DraftX keeps working offline for 72 hours.</td></tr>
+    <tr><td>Trial expired</td><td>Email <a href="mailto:sales@opusag.co.uk">sales@opusag.co.uk</a> &mdash; we convert your key in place, no reinstall, nothing lost. All files you created remain yours either way.</td></tr>
+    <tr><td><span class="kbd">Run Job Pack</span> greyed out</td><td>Set the model first with <span class="kbd">Detect from assembly</span>.</td></tr>
+    <tr><td>Batch export does nothing</td><td>Make sure SolidWorks is installed and licensed on this machine, and close any blocking SolidWorks dialog boxes.</td></tr>
+    <tr><td>A tab is locked</td><td>You're in Guided mode &mdash; click the locked tab and it tells you the step to complete first, or switch to Free mode in the header.</td></tr>
+    <tr><td>Anything else</td><td><a href="mailto:sales@opusag.co.uk">sales@opusag.co.uk</a> &mdash; include the job name and a screenshot if you can.</td></tr>
+  </table>
+</div>
+
+<footer>&copy; 2026 OpusAg Ltd &middot; <a href="index.html">draftx home</a> &middot; <a href="privacy.html">privacy policy</a> &middot; <a href="eula.html">license agreement</a></footer>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightboxImg" alt=""/></div>
+<script>
+  function lbOpen(img){
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('lightbox').style.display = 'none';
+  });
+</script>
+
+</body>
+</html>

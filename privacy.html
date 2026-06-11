@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Privacy Policy — DraftX</title>
+<meta name="description" content="DraftX privacy policy. Your drawings never leave your site — we collect only what's needed to run licensing."/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  :root{
+    --bg:#07070f; --bg2:#0a0a14; --card:#0e0e1a; --card2:#12121f;
+    --border:#1e1e38; --border2:#2a2a4a;
+    --text:#e2e8f0; --muted:#94a3b8; --faint:#64748b;
+    --blue:#3b82f6; --blue-d:#2563eb; --blue-l:#60a5fa;
+    --green:#34d399;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7}
+  a{color:var(--blue-l);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:sticky;top:0;z-index:100;background:rgba(7,7,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:28px;padding:16px 24px;max-width:1140px;margin:0 auto}
+  .wordmark{font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--text)}
+  .wordmark b{color:var(--blue)}
+  .nav-links{margin-left:auto;display:flex;gap:24px}
+  .nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+  .doc{max-width:820px;margin:0 auto;padding:70px 24px 90px}
+  .doc h1{font-size:34px;font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+  .doc .meta{color:var(--faint);font-size:14px;margin-bottom:42px}
+  .doc h2{font-size:21px;font-weight:700;margin:42px 0 14px;color:var(--text)}
+  .doc p{color:var(--muted);margin-bottom:14px}
+  .doc ul{color:var(--muted);margin:0 0 14px 22px}
+  .doc li{margin-bottom:8px}
+  .doc strong{color:var(--text)}
+  .callout{background:var(--card);border:1px solid var(--border2);border-left:3px solid var(--green);border-radius:10px;padding:18px 22px;margin:26px 0}
+  .callout p{margin-bottom:6px}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border:1px solid var(--border);color:var(--muted);vertical-align:top}
+  th{background:var(--card);color:var(--text);font-weight:600}
+  footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;color:var(--faint);font-size:14px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="wordmark">Draft<b>X</b></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="eula.html">License agreement</a>
+      <a href="mailto:sales@opusag.co.uk">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="doc">
+  <h1>Privacy Policy</h1>
+  <div class="meta">OpusAg Ltd &middot; Effective 11 June 2026 &middot; Version 1.0</div>
+
+  <div class="callout">
+    <p><strong>The short version:</strong></p>
+    <p>&bull; <strong>OpusAg never receives your drawings or CAD data.</strong> DraftX processes them locally on your machines. We hold no copy.</p>
+    <p>&bull; If you enable the optional AI drawing sorting feature, drawing images go directly from your machines to <strong>your own</strong> AI provider account (Anthropic or AWS Bedrock) &mdash; see section 3. They still never pass through OpusAg.</p>
+    <p>&bull; We collect the minimum needed to run licensing: contact details, licence keys, machine fingerprints and validation logs.</p>
+    <p>&bull; We don't sell data, we don't advertise, and the app contains no tracking.</p>
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>DraftX is made by <strong>OpusAg Ltd</strong>, registered in England and Wales (company no. 15790886), registered office: 6 George House, 40 Huntingdon Street, St. Neots, Cambridgeshire, PE19 1BB. OpusAg Ltd is the data controller for the personal data described below. Contact: <a href="mailto:sales@opusag.co.uk">sales@opusag.co.uk</a>. ICO registration: pending (this page will be updated with the registration number once issued).</p>
+
+  <h2>2. What we collect and why</h2>
+  <table>
+    <tr><th>Data</th><th>Where it lives</th><th>Why (lawful basis)</th></tr>
+    <tr><td>Contact name, business email, company name</td><td>OpusAg licence server</td><td>Issuing and administering licences and trials (performance of contract)</td></tr>
+    <tr><td>Licence key, type, expiry</td><td>OpusAg licence server</td><td>Licence administration (performance of contract)</td></tr>
+    <tr><td>Machine fingerprint (hashed hardware ID) and machine name</td><td>OpusAg licence server</td><td>Enforcing per-machine limits, preventing misuse (legitimate interest)</td></tr>
+    <tr><td>Validation logs (key, machine, timestamp, IP)</td><td>OpusAg licence server</td><td>Security and support troubleshooting (legitimate interest)</td></tr>
+    <tr><td>Operator usernames in job records</td><td><strong>Locally only</strong> &mdash; your machines and network</td><td>So your team can see who processed which drawings. Not transmitted to OpusAg; your organisation controls this data</td></tr>
+  </table>
+  <p>DraftX does <strong>not</strong> transmit to OpusAg: drawings, CAD models, PDFs, job data, customer lists, pricing, or any file contents.</p>
+
+  <h2>3. Optional AI drawing sorting</h2>
+  <p>DraftX includes an optional AI classification feature for sorting drawings. It is off until you configure it with <strong>your own credentials</strong>:</p>
+  <ul>
+    <li>When enabled, DraftX sends a <strong>rendered image of each drawing</strong>, plus its filename, OCR text and basic part metadata, to the AI provider <strong>you</strong> configure: either <strong>Anthropic</strong> (direct API) or <strong>AWS Bedrock</strong>, using your own API key / AWS account.</li>
+    <li>The data flows <strong>directly from your machines to your provider account</strong>. It never passes through, and is never visible to, OpusAg.</li>
+    <li>Engineering drawings can contain personal data in title blocks (e.g. "drawn by" names). For that data, your organisation is the controller and your chosen AI provider is your processor under your agreement with them.</li>
+    <li><strong>Data residency:</strong> the AWS Bedrock option defaults to the London region (eu-west-2) with an EU inference profile, keeping processing inside UK/EU AWS regions. The direct Anthropic API processes data in the United States. Choose the option that matches your requirements.</li>
+    <li>Both providers' commercial terms state that API inputs are not used to train models. The feature can be disabled at any time, and DraftX falls back to non-AI sorting methods.</li>
+  </ul>
+
+  <h2>4. Where it's stored</h2>
+  <p>The licence server is hosted on Railway's cloud platform. Installer downloads are served via GitHub Releases, which may log standard web-request data (such as IP addresses) under GitHub's own privacy policy.</p>
+
+  <h2>5. How long we keep it</h2>
+  <ul>
+    <li>Licence and contact records: life of the licence plus 6 years.</li>
+    <li>Validation logs: 12 months, then deleted or anonymised.</li>
+    <li>Expired trial records: 12 months after expiry unless converted to a paid licence.</li>
+  </ul>
+
+  <h2>6. Sharing</h2>
+  <p>We never sell or rent personal data. We share it only with hosting providers acting as processors under contract, professional advisers where necessary, and authorities where required by law.</p>
+
+  <h2>7. International transfers</h2>
+  <p>Where our hosting providers (Railway, GitHub) process data outside the UK/EEA (for example in the United States), transfers rely on the UK International Data Transfer Agreement, the UK&ndash;US Data Bridge, or equivalent safeguards in those providers' terms.</p>
+
+  <h2>8. Your rights</h2>
+  <p>Under UK GDPR you can ask us to access, correct, delete, restrict, object to, or port your data. Email <a href="mailto:sales@opusag.co.uk">sales@opusag.co.uk</a> and we'll respond within one month. You can also complain to the <a href="https://ico.org.uk">Information Commissioner's Office</a>.</p>
+
+  <h2>9. Security</h2>
+  <p>Licence server access is restricted and authenticated, data in transit is encrypted (HTTPS/TLS), and machine fingerprints are one-way hashes that cannot be reversed into hardware details.</p>
+
+  <h2>10. Changes</h2>
+  <p>Changes to this policy will be posted here with a new effective date. Material changes will be notified to licence contacts by email.</p>
+</div>
+
+<footer>&copy; 2026 OpusAg Ltd &middot; <a href="index.html">draftx home</a> &middot; <a href="eula.html">license agreement</a></footer>
+
+</body>
+</html>

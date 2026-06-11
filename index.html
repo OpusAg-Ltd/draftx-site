@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DraftX — From SolidWorks assembly to nest-ready drawings in minutes</title>
+<meta name="description" content="DraftX automates the drawing office: validated job packs, batch PDF/DXF export, AI drawing sorting, QC reports and Lantek-ready nesting — straight from your SolidWorks assembly."/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  :root{
+    --bg:#07070f; --bg2:#0a0a14; --card:#0e0e1a; --card2:#12121f;
+    --border:#1e1e38; --border2:#2a2a4a;
+    --text:#e2e8f0; --muted:#94a3b8; --faint:#64748b; --dim:#374151;
+    --blue:#3b82f6; --blue-d:#2563eb; --blue-l:#60a5fa;
+    --amber:#f59e0b; --green:#34d399;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+  a{color:var(--blue-l);text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+  /* ── Nav ─────────────────────────────────────────────────────────────── */
+  nav{position:sticky;top:0;z-index:100;background:rgba(7,7,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:28px;padding:16px 24px;max-width:1140px;margin:0 auto}
+  .wordmark{font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--text)}
+  .wordmark b{color:var(--blue)}
+  .nav-links{display:flex;gap:24px;margin-left:auto;align-items:center}
+  .nav-links a{color:var(--muted);font-size:14px;font-weight:500;transition:color .15s}
+  .nav-links a:hover{color:var(--text)}
+  .btn{display:inline-block;padding:11px 24px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:all .15s;letter-spacing:.01em}
+  .btn-primary{background:var(--blue);color:#fff !important}
+  .btn-primary:hover{background:var(--blue-d);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text) !important}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue-l) !important}
+  .nav-links .btn{padding:9px 18px}
+
+  /* ── Hero ────────────────────────────────────────────────────────────── */
+  .hero{position:relative;padding:110px 0 90px;text-align:center;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:-40% -20% auto;height:140%;background:
+    radial-gradient(600px 320px at 30% 20%, rgba(59,130,246,.16), transparent 70%),
+    radial-gradient(500px 300px at 70% 10%, rgba(37,99,235,.10), transparent 70%);
+    pointer-events:none}
+  .hero .wrap{position:relative}
+  .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-l);background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:99px;padding:6px 16px;margin-bottom:26px}
+  h1{font-size:clamp(34px,5.4vw,58px);font-weight:900;line-height:1.12;letter-spacing:-.02em;max-width:880px;margin:0 auto 22px}
+  h1 .hl{color:var(--blue)}
+  .sub{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:680px;margin:0 auto 38px}
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .hero-note{margin-top:18px;font-size:13px;color:var(--faint)}
+
+  /* ── App window mock ─────────────────────────────────────────────────── */
+  .mock{max-width:920px;margin:70px auto 0;background:var(--card);border:1px solid var(--border2);border-radius:14px;box-shadow:0 40px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(59,130,246,.06);overflow:hidden;text-align:left}
+  .mock-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--card2);border-bottom:1px solid var(--border)}
+  .mock-dot{width:10px;height:10px;border-radius:50%;background:#1e1e38}
+  .mock-tabs{display:flex;gap:2px;padding:9px 14px 0;border-bottom:1px solid var(--border);font-size:11px;font-weight:600;color:var(--faint);overflow:hidden;white-space:nowrap}
+  .mock-tab{padding:7px 12px;border-radius:7px 7px 0 0}
+  .mock-tab.on{color:var(--blue-l);background:rgba(59,130,246,.08);border-bottom:2px solid var(--blue)}
+  .mock-body{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:22px}
+  .mock-cell{background:var(--card2);border:1px solid var(--border);border-radius:9px;padding:14px}
+  .mock-kpi{font-size:22px;font-weight:800;color:var(--blue-l)}
+  .mock-kpi.amber{color:var(--amber)} .mock-kpi.green{color:var(--green)}
+  .mock-lbl{font-size:10px;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;margin-top:4px}
+  .mock-rows{grid-column:1/-1;display:flex;flex-direction:column;gap:8px}
+  .mock-row{display:flex;align-items:center;gap:10px;background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--muted)}
+  .mock-row .tick{color:var(--green);font-weight:700}
+  .mock-row .bar{flex:1;height:5px;border-radius:3px;background:#1a1a30;overflow:hidden}
+  .mock-row .bar>i{display:block;height:100%;background:var(--blue);border-radius:3px}
+  .mock-img{display:block;width:100%;cursor:zoom-in}
+
+  /* ── Screenshot gallery ──────────────────────────────────────────────── */
+  .shot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .shot{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .2s}
+  .shot:hover{border-color:rgba(59,130,246,.45);transform:translateY(-3px)}
+  .shot img{display:block;width:100%;aspect-ratio:16/9.5;object-fit:cover;object-position:top;cursor:zoom-in;border-bottom:1px solid var(--border)}
+  .shot figcaption{font-size:12.5px;color:var(--muted);padding:12px 16px}
+  .shot.big img{aspect-ratio:auto;max-height:520px}
+  .roi-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center}
+  .roi-grid .pts{list-style:none}
+  .roi-grid .pts li{padding:6px 0;color:var(--muted);font-size:15px}
+  .roi-grid .pts li::before{content:'\2713';color:var(--green);font-weight:800;margin-right:12px}
+
+  /* ── Lightbox ────────────────────────────────────────────────────────── */
+  #lightbox{display:none;position:fixed;inset:0;z-index:300;background:rgba(4,4,10,.92);align-items:center;justify-content:center;padding:34px;cursor:zoom-out}
+  #lightbox img{max-width:100%;max-height:100%;border-radius:10px;border:1px solid var(--border2);box-shadow:0 30px 80px rgba(0,0,0,.7)}
+
+  /* ── Sections ────────────────────────────────────────────────────────── */
+  section{padding:90px 0}
+  .sec-head{text-align:center;max-width:680px;margin:0 auto 56px}
+  .sec-eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-l);margin-bottom:14px}
+  h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.01em;line-height:1.2;margin-bottom:14px}
+  .sec-sub{color:var(--muted);font-size:16px}
+
+  /* ── Stats band ──────────────────────────────────────────────────────── */
+  .stats-band{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 0}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+  .stat-big{font-size:clamp(30px,4vw,44px);font-weight:900;color:var(--blue)}
+  .stat-big.amber{color:var(--amber)} .stat-big.green{color:var(--green)}
+  .stat-cap{font-size:13px;color:var(--muted);margin-top:6px}
+  .stats-note{text-align:center;margin-top:26px;font-size:12px;color:var(--dim)}
+
+  /* ── Pipeline ────────────────────────────────────────────────────────── */
+  .pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .pipe-step{position:relative;padding:0 18px;text-align:center}
+  .pipe-num{width:44px;height:44px;border-radius:50%;background:var(--card);border:2px solid var(--blue);color:var(--blue-l);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:2}
+  .pipe-step::before{content:'';position:absolute;top:22px;left:calc(-50% + 22px);width:calc(100% - 44px);height:2px;background:linear-gradient(90deg,var(--border2),var(--blue));opacity:.5}
+  .pipe-step:first-child::before{display:none}
+  .pipe-step h3{font-size:16px;font-weight:700;margin-bottom:8px}
+  .pipe-step p{font-size:13px;color:var(--muted)}
+  .pipe-note{text-align:center;margin-top:44px;font-size:14px;color:var(--faint)}
+  .pipe-note b{color:var(--blue-l)}
+
+  /* ── Features ────────────────────────────────────────────────────────── */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;transition:border-color .2s,transform .2s}
+  .feat:hover{border-color:rgba(59,130,246,.45);transform:translateY(-3px)}
+  .feat .ico{font-size:24px;margin-bottom:14px}
+  .feat h3{font-size:16px;font-weight:700;margin-bottom:8px}
+  .feat p{font-size:13.5px;color:var(--muted)}
+  .feat .tag{display:inline-block;margin-left:8px;font-size:9px;font-weight:800;letter-spacing:.08em;color:var(--amber);background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:99px;padding:2px 8px;vertical-align:middle}
+
+  /* ── Trial ───────────────────────────────────────────────────────────── */
+  .trial-card{background:linear-gradient(160deg,var(--card) 0%,#0d1322 100%);border:1px solid rgba(59,130,246,.3);border-radius:20px;padding:56px;display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+  .trial-card::after{content:'';position:absolute;right:-120px;top:-120px;width:340px;height:340px;background:radial-gradient(circle,rgba(59,130,246,.14),transparent 70%)}
+  .trial-card h2{margin-bottom:16px}
+  .trial-card .pts{list-style:none;margin-top:22px}
+  .trial-card .pts li{padding:7px 0;color:var(--muted);font-size:15px}
+  .trial-card .pts li::before{content:'\2713';color:var(--green);font-weight:800;margin-right:12px}
+  .trial-side{text-align:center;position:relative;z-index:2}
+  .trial-days{font-size:72px;font-weight:900;color:var(--amber);line-height:1}
+  .trial-days-cap{font-size:14px;color:var(--muted);margin:6px 0 26px;text-transform:uppercase;letter-spacing:.14em;font-weight:700}
+
+  /* ── IT strip ────────────────────────────────────────────────────────── */
+  .it-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .it-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px}
+  .it-item h4{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--text)}
+  .it-item p{font-size:13px;color:var(--muted)}
+
+  /* ── Contact / footer ────────────────────────────────────────────────── */
+  .contact{text-align:center}
+  .contact .btn{font-size:16px;padding:15px 34px}
+  footer{border-top:1px solid var(--border);padding:34px 0;margin-top:40px}
+  .foot-in{display:flex;align-items:center;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--faint)}
+  .foot-links{margin-left:auto;display:flex;gap:20px}
+  .foot-links a{color:var(--faint)}
+  .foot-links a:hover{color:var(--muted)}
+
+  /* ── Reveal animation ────────────────────────────────────────────────── */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .mock-body,.stats-grid{grid-template-columns:repeat(2,1fr)}
+    .feat-grid,.it-grid{grid-template-columns:1fr 1fr}
+    .shot-grid{grid-template-columns:1fr 1fr}
+    .roi-grid{grid-template-columns:1fr}
+    .pipe{grid-template-columns:1fr 1fr;gap:34px 0}
+    .pipe-step:nth-child(3)::before{display:none}
+    .trial-card{grid-template-columns:1fr;padding:38px}
+    .nav-links a:not(.btn){display:none}
+  }
+  @media (max-width:600px){
+    .feat-grid,.it-grid,.pipe,.shot-grid{grid-template-columns:1fr}
+    .pipe-step::before{display:none}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <span class="wordmark">Draft<b>X</b></span>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#gallery">Screenshots</a>
+      <a href="#features">Features</a>
+      <a href="#trial">Free trial</a>
+      <a href="#it">For IT</a>
+      <a class="btn btn-primary" href="#contact">Book a demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">For SolidWorks drawing offices</span>
+    <h1>From SolidWorks assembly to sorted, stamped, <span class="hl">nest&#8209;ready drawings</span> in minutes.</h1>
+    <p class="sub">DraftX automates the slow, error-prone work between design release and the shop floor &mdash; validated job packs, batch PDF &amp; DXF export, AI drawing sorting, QC reporting and Lantek-ready nesting.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#contact">Book a 15-minute demo</a>
+      <a class="btn btn-ghost" href="#trial">Start a free trial</a>
+    </div>
+    <div class="hero-note">Runs on your machines. Your drawings never leave your network.</div>
+
+    <!-- Real app screenshot — QC Report, all gates green -->
+    <div class="mock rv">
+      <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
+      <img class="mock-img" src="screenshots/qc.png" alt="DraftX QC Report — every pipeline gate green, part-by-part DXF coverage, ready for nesting" onclick="lbOpen(this)"/>
+    </div>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="wrap">
+    <div class="stats-grid rv">
+      <div><div class="stat-big amber">&pound;24.3k</div><div class="stat-cap">labour saved, measured in-app</div></div>
+      <div><div class="stat-big green">405 hrs</div><div class="stat-cap">of drawing-office time given back</div></div>
+      <div><div class="stat-big">50.7</div><div class="stat-cap">working days saved</div></div>
+      <div><div class="stat-big">28.9k</div><div class="stat-cap">parts processed automatically</div></div>
+    </div>
+    <div class="stats-note">Real figures from DraftX Analytics in production at a UK steel fabrication company &mdash; tracked live, per job, per user, per week.</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-eyebrow">How it works</div>
+      <h2>One guided pipeline, four steps</h2>
+      <p class="sec-sub">DraftX walks every user through the same proven workflow &mdash; new starters can't take a wrong turn.</p>
+    </div>
+    <div class="pipe rv">
+      <div class="pipe-step">
+        <div class="pipe-num">1</div>
+        <h3>Job Pack</h3>
+        <p>Point DraftX at your SolidWorks assembly. It scans every part, validates parameters and flags missing data before anything is exported.</p>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">2</div>
+        <h3>Batch Export</h3>
+        <p>Every drawing exported to PDF and every flat pattern to DXF in one run &mdash; named, stamped and filed to your conventions.</p>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">3</div>
+        <h3>AI Sort</h3>
+        <p>Drawings are classified by operation &mdash; laser, folding, fabrication, bought-out &mdash; with a review queue for anything uncertain.</p>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-num">4</div>
+        <h3>Release</h3>
+        <p>QC gates confirm the job is complete, job cards print, and nest-ready DXFs flow to Lantek with NestX.</p>
+      </div>
+    </div>
+    <div class="pipe-note">Every step is tracked, so Analytics shows exactly <b>how many hours and pounds</b> DraftX saves you.</div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-eyebrow">See it in action</div>
+      <h2>Real screens, real job</h2>
+      <p class="sec-sub">Captured from a live production job &mdash; a 1600&times;600 de-stoner, 105 parts, assembly to nest-ready in one sitting.</p>
+    </div>
+    <div class="shot-grid">
+      <figure class="shot rv"><img loading="lazy" src="screenshots/jobpack.png" alt="Job Pack validation report" onclick="lbOpen(this)"/><figcaption>Job Pack &mdash; 232 components scanned, every gap flagged before export</figcaption></figure>
+      <figure class="shot rv"><img loading="lazy" src="screenshots/sort.png" alt="AI drawing sorting" onclick="lbOpen(this)"/><figcaption>AI Sort &mdash; 105 parts classified by operation, 89.7% rolling accuracy</figcaption></figure>
+      <figure class="shot rv"><img loading="lazy" src="screenshots/drwreview.png" alt="Drawing review" onclick="lbOpen(this)"/><figcaption>Drawing Review &mdash; every sorted drawing, one click from SolidWorks</figcaption></figure>
+      <figure class="shot rv"><img loading="lazy" src="screenshots/jcard.png" alt="Auto-generated job card" onclick="lbOpen(this)"/><figcaption>Job Card &mdash; branded, auto-filled from CAD, live preview</figcaption></figure>
+      <figure class="shot rv"><img loading="lazy" src="screenshots/nestx.png" alt="NestX Lantek job preparation" onclick="lbOpen(this)"/><figcaption>NestX &mdash; sorted DXFs straight into a Lantek-ready job</figcaption></figure>
+      <figure class="shot rv"><img loading="lazy" src="screenshots/print.png" alt="Batch print queue" onclick="lbOpen(this)"/><figcaption>Batch Print &mdash; full drawing sets by operation, one click</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section id="roi" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="roi-grid rv">
+      <div>
+        <div class="sec-eyebrow">The numbers</div>
+        <h2>Your MD's favourite tab</h2>
+        <p class="sec-sub" style="margin-bottom:18px">DraftX measures itself. Every export, sort, stamp and print is logged against a time-study benchmark, so the Analytics dashboard shows exactly what the software is worth &mdash; in hours and in pounds, at your hourly rate.</p>
+        <ul class="pts">
+          <li>Money, hours and working days saved &mdash; headline KPIs</li>
+          <li>Per-operation breakdown: what saves the most</li>
+          <li>Per-user and per-week trends</li>
+          <li>Benchmarks you can tune to your own shop</li>
+        </ul>
+      </div>
+      <figure class="shot big rv"><img loading="lazy" src="screenshots/analytics.png" alt="DraftX Analytics — £24.3k and 405 hours saved" onclick="lbOpen(this)"/><figcaption>Analytics &mdash; real production data, not projections</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-eyebrow">Features</div>
+      <h2>Everything between design and the shop floor</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat rv"><div class="ico">&#128230;</div><h3>Job Pack validation</h3><p>Scans the full assembly, checks part parameters per company conventions and produces a part-by-part readiness report before export.</p></div>
+      <div class="feat rv"><div class="ico">&#128228;</div><h3>Batch PDF &amp; DXF export</h3><p>One click exports every drawing and flat pattern in the job &mdash; consistently named, stamped with units and filed automatically.</p></div>
+      <div class="feat rv"><div class="ico">&#129302;</div><h3>AI drawing sorting</h3><p>Classifies drawings by manufacturing operation with your own categories. Uncertain calls go to a visual review queue, never silently wrong.</p></div>
+      <div class="feat rv"><div class="ico">&#9998;</div><h3>Built-in DXF editor</h3><p>CAD-grade snapping, measuring and editing for quick flat-pattern fixes &mdash; with hand-edits protected from being overwritten by re-exports.</p></div>
+      <div class="feat rv"><div class="ico">&#9989;</div><h3>QC gates</h3><p>A pipeline checklist proves every job pack ran, every file exported and every drawing sorted &mdash; before anything reaches the shop floor.</p></div>
+      <div class="feat rv"><div class="ico">&#128262;</div><h3>NestX <span class="tag">Add-on</span></h3><p>Prepares nest-ready jobs for Lantek directly from sorted DXFs &mdash; material, thickness and quantities included.</p></div>
+      <div class="feat rv"><div class="ico">&#128203;</div><h3>Job cards &amp; batch print</h3><p>Auto-generated job cards and one-click batch printing of full drawing sets, grouped by operation.</p></div>
+      <div class="feat rv"><div class="ico">&#128202;</div><h3>Savings analytics</h3><p>Hours and pounds saved per job, per user and per week &mdash; the ROI report your MD wants, generated automatically.</p></div>
+      <div class="feat rv"><div class="ico">&#129517;</div><h3>Guided mode</h3><p>Tabs unlock as each workflow step completes, with a clear "next step" prompt &mdash; new users are productive on day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIAL -->
+<section id="trial">
+  <div class="wrap">
+    <div class="trial-card rv">
+      <div>
+        <div class="sec-eyebrow">Free trial</div>
+        <h2>Try DraftX on your own jobs</h2>
+        <p class="sec-sub">Full access for your team, on your drawings, with your conventions. No card, no commitment &mdash; and your data stays exactly where it is if you decide not to continue.</p>
+        <ul class="pts">
+          <li>Every feature unlocked, including NestX</li>
+          <li>Installed on your machines &mdash; nothing uploaded</li>
+          <li>We help you set up your first job pack</li>
+          <li>Live countdown in-app, no surprise cut-off</li>
+        </ul>
+      </div>
+      <div class="trial-side">
+        <div class="trial-days">30</div>
+        <div class="trial-days-cap">days, full access</div>
+        <a class="btn btn-primary" href="#contact">Request a trial key</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IT -->
+<section id="it" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-eyebrow">For your IT team</div>
+      <h2>On-premise by design</h2>
+    </div>
+    <div class="it-grid rv">
+      <div class="it-item"><h4>Your data stays put</h4><p>DraftX runs locally against your SolidWorks installation and network folders. Drawings, models and job data never leave your network.</p></div>
+      <div class="it-item"><h4>Minimal footprint</h4><p>Windows desktop app. Requires SolidWorks on the machine for export features. No server to host, no database to manage.</p></div>
+      <div class="it-item"><h4>Simple licensing</h4><p>Machine-bound keys validated against our license service over HTTPS &mdash; the only outbound connection &mdash; with a 72-hour offline grace period.</p></div>
+    </div>
+    <div class="rv" style="text-align:center;margin-top:34px">
+      <a class="btn btn-ghost" href="https://draftx-license-server-production.up.railway.app/download/latest">&#11015; Download DraftX for Windows</a>
+      <div class="hero-note" style="margin-top:12px">Always the latest version. Installs in minutes &mdash; you'll need a license or trial key to activate. New here? Follow the <a href="quickstart.html">quick start guide</a>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2);border-top:1px solid var(--border)">
+  <div class="wrap contact">
+    <div class="sec-head rv" style="margin-bottom:30px">
+      <div class="sec-eyebrow">Get started</div>
+      <h2>See it on your own drawings</h2>
+      <p class="sec-sub">A 15-minute screen share is all it takes. Bring a recent job &mdash; we'll show you what DraftX would have done with it.</p>
+    </div>
+    <div class="rv">
+      <a class="btn btn-primary" href="mailto:sales@opusag.co.uk?subject=DraftX%20demo%20request">Book a demo &mdash; sales@opusag.co.uk</a>
+      <div class="hero-note" style="margin-top:16px">Or request a 30-day trial key in the same email.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span class="wordmark" style="font-size:16px">Draft<b>X</b></span>
+    <span>&copy; 2026 OpusAg Ltd. All rights reserved.</span>
+    <div class="foot-links">
+      <a href="https://draftx-license-server-production.up.railway.app/download/latest">Download</a>
+      <a href="quickstart.html">Quick start</a>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="eula.html">License agreement</a>
+      <a href="mailto:sales@opusag.co.uk">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightboxImg" alt=""/></div>
+
+<script>
+  // Scroll-reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  // Lightbox
+  function lbOpen(img) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightboxImg').src = img.src;
+    lb.style.display = 'flex';
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.getElementById('lightbox').style.display = 'none';
+  });
+</script>
+</body>
+</html>
