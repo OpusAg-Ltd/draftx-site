@@ -8,31 +8,58 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
   :root{
-    --bg:#07070f; --bg2:#0a0a14; --card:#0e0e1a; --card2:#12121f;
-    --border:#1e1e38; --border2:#2a2a4a;
-    --text:#e2e8f0; --muted:#94a3b8; --faint:#64748b; --dim:#374151;
+    --bg:#06060e; --bg2:#0b0b18; --card:#11111f; --card2:#181830;
+    --border:#21213c; --border2:#30304e;
+    --text:#e8edf5; --muted:#a6b3c9; --faint:#7d8aa3; --dim:#3a4257;
     --blue:#3b82f6; --blue-d:#2563eb; --blue-l:#60a5fa;
+    --cyan:#22d3ee; --violet:#8b5cf6;
     --amber:#f59e0b; --green:#34d399;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden}
+  html{scroll-behavior:smooth;scroll-padding-top:90px}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;position:relative}
+  body::before{content:'';position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(circle at 18% 8%, rgba(59,130,246,.10), transparent 38%),
+    radial-gradient(circle at 85% 22%, rgba(139,92,246,.08), transparent 40%),
+    radial-gradient(circle at 60% 95%, rgba(34,211,238,.06), transparent 45%),
+    var(--bg);pointer-events:none}
+  body::after{content:'';position:fixed;inset:0;z-index:-1;opacity:.5;pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:26px 26px;mask-image:radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%);-webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%)}
   a{color:var(--blue-l);text-decoration:none}
   .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  ::selection{background:rgba(59,130,246,.32);color:#fff}
+  :focus-visible{outline:2px solid var(--blue-l);outline-offset:3px;border-radius:6px}
+  html{scrollbar-color:var(--border2) var(--bg)}
+  ::-webkit-scrollbar{width:12px;height:12px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:8px;border:3px solid var(--bg)}
+  ::-webkit-scrollbar-thumb:hover{background:#3a3a5e}
+
+  /* ── Scroll progress + back-to-top ───────────────────────────────────── */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;background:linear-gradient(90deg,var(--blue),var(--cyan) 60%,var(--violet));box-shadow:0 0 12px rgba(59,130,246,.6);transition:width .1s linear}
+  #toTop{position:fixed;right:26px;bottom:26px;z-index:150;width:46px;height:46px;border-radius:50%;border:1px solid var(--border2);background:rgba(14,14,26,.9);backdrop-filter:blur(8px);color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(14px) scale(.9);pointer-events:none;transition:opacity .25s,transform .25s,background .15s,border-color .15s,color .15s;font-family:inherit;line-height:1}
+  #toTop.show{opacity:1;transform:none;pointer-events:auto}
+  #toTop:hover{background:var(--blue);border-color:var(--blue);color:#fff;transform:translateY(-2px)}
 
   /* ── Nav ─────────────────────────────────────────────────────────────── */
-  nav{position:sticky;top:0;z-index:100;background:rgba(7,7,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  nav{position:sticky;top:0;z-index:100;background:rgba(7,7,15,.72);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:background .25s,border-color .25s,box-shadow .25s}
+  nav.scrolled{background:rgba(7,7,15,.9);border-bottom-color:var(--border);box-shadow:0 8px 30px rgba(0,0,0,.35)}
   .nav-in{display:flex;align-items:center;gap:28px;padding:16px 24px;max-width:1140px;margin:0 auto}
   .wordmark{font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--text)}
   .wordmark b{color:var(--blue)}
   .nav-links{display:flex;gap:24px;margin-left:auto;align-items:center}
-  .nav-links a{color:var(--muted);font-size:14px;font-weight:500;transition:color .15s}
-  .nav-links a:hover{color:var(--text)}
-  .btn{display:inline-block;padding:11px 24px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:all .15s;letter-spacing:.01em}
-  .btn-primary{background:var(--blue);color:#fff !important}
-  .btn-primary:hover{background:var(--blue-d);transform:translateY(-1px)}
-  .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text) !important}
-  .btn-ghost:hover{border-color:var(--blue);color:var(--blue-l) !important}
+  .nav-links a:not(.btn){color:var(--muted);font-size:14px;font-weight:500;transition:color .15s;position:relative;padding:4px 0}
+  .nav-links a:not(.btn)::after{content:'';position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--blue);border-radius:2px;transition:right .25s ease}
+  .nav-links a:not(.btn):hover{color:var(--text)}
+  .nav-links a:not(.btn):hover::after,.nav-links a.active::after{right:0}
+  .nav-links a.active{color:var(--text)}
+  .btn{display:inline-block;padding:11px 24px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:transform .15s,box-shadow .15s,background .15s,border-color .15s,color .15s;letter-spacing:.01em}
+  .btn:active{transform:translateY(0) scale(.98)}
+  .btn-primary{background:linear-gradient(180deg,var(--blue-l),var(--blue));color:#fff !important;box-shadow:0 4px 14px rgba(59,130,246,.32),inset 0 1px 0 rgba(255,255,255,.18)}
+  .btn-primary:hover{background:linear-gradient(180deg,var(--blue),var(--blue-d));transform:translateY(-2px);box-shadow:0 8px 22px rgba(59,130,246,.42),inset 0 1px 0 rgba(255,255,255,.18)}
+  .btn-ghost{background:rgba(255,255,255,.02);border:1px solid var(--border2);color:var(--text) !important}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue-l) !important;transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.3)}
   .nav-links .btn{padding:9px 18px}
 
   /* ── Hero ────────────────────────────────────────────────────────────── */
@@ -44,13 +71,14 @@
   .hero .wrap{position:relative}
   .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-l);background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:99px;padding:6px 16px;margin-bottom:26px}
   h1{font-size:clamp(34px,5.4vw,58px);font-weight:900;line-height:1.12;letter-spacing:-.02em;max-width:880px;margin:0 auto 22px}
-  h1 .hl{color:var(--blue)}
+  h1 .hl{background:linear-gradient(110deg,var(--blue-l) 0%,var(--cyan) 55%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--blue)}
   .sub{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:680px;margin:0 auto 38px}
   .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .hero-note{margin-top:18px;font-size:13px;color:var(--faint)}
 
   /* ── App window mock ─────────────────────────────────────────────────── */
-  .mock{max-width:920px;margin:70px auto 0;background:var(--card);border:1px solid var(--border2);border-radius:14px;box-shadow:0 40px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(59,130,246,.06);overflow:hidden;text-align:left}
+  .mock{max-width:920px;margin:70px auto 0;background:var(--card);border:1px solid var(--border2);border-radius:14px;box-shadow:0 40px 90px rgba(0,0,0,.55), 0 0 0 1px rgba(59,130,246,.06);overflow:hidden;text-align:left;transition:transform .35s ease,box-shadow .35s ease}
+  .mock:hover{transform:translateY(-6px);box-shadow:0 55px 110px rgba(0,0,0,.62), 0 0 0 1px rgba(59,130,246,.12)}
   .mock-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;background:var(--card2);border-bottom:1px solid var(--border)}
   .mock-dot{width:10px;height:10px;border-radius:50%;background:#1e1e38}
   .mock-tabs{display:flex;gap:2px;padding:9px 14px 0;border-bottom:1px solid var(--border);font-size:11px;font-weight:600;color:var(--faint);overflow:hidden;white-space:nowrap}
@@ -68,13 +96,31 @@
   .mock-row .bar>i{display:block;height:100%;background:var(--blue);border-radius:3px}
   .mock-img{display:block;width:100%;cursor:zoom-in}
 
-  /* ── Screenshot gallery ──────────────────────────────────────────────── */
-  .shot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .shot{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .2s}
-  .shot:hover{border-color:rgba(59,130,246,.45);transform:translateY(-3px)}
-  .shot img{display:block;width:100%;aspect-ratio:16/9.5;object-fit:cover;object-position:top;cursor:zoom-in;border-bottom:1px solid var(--border)}
+  /* ── Screenshot slideshow ────────────────────────────────────────────── */
+  .show{position:relative;max-width:1080px;margin:0 auto}
+  .show-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;gap:0;scrollbar-width:none;border-radius:14px}
+  .show-track::-webkit-scrollbar{display:none}
+  .show-slide{flex:0 0 100%;scroll-snap-align:center;background:var(--card);border:1px solid var(--border2);border-radius:14px;overflow:hidden;margin:0;box-shadow:0 30px 70px rgba(0,0,0,.45),0 0 0 1px rgba(59,130,246,.05)}
+  .show-slide img{display:block;width:100%;cursor:zoom-in;border-bottom:1px solid var(--border)}
+  .show-slide figcaption{padding:20px 28px 24px;text-align:left}
+  .show-slide figcaption b{display:block;font-size:11px;font-weight:800;color:var(--blue-l);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+  .show-slide figcaption .show-title{display:block;font-size:20px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.01em}
+  .show-slide figcaption span{display:block;font-size:14.5px;color:var(--muted);line-height:1.55}
+  .show-arrow{position:absolute;top:38%;transform:translateY(-50%);z-index:2;width:46px;height:46px;border-radius:50%;border:1px solid var(--border2);background:rgba(14,14,26,.85);backdrop-filter:blur(8px);color:var(--text);font-size:20px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s,color .15s;font-family:inherit;line-height:1}
+  .show-arrow:hover{background:var(--card2);border-color:var(--blue);color:var(--blue-l)}
+  .show-arrow:disabled{opacity:.35;cursor:default}
+  .show-arrow:disabled:hover{background:rgba(14,14,26,.85);border-color:var(--border2);color:var(--text)}
+  .show-prev{left:-22px}.show-next{right:-22px}
+  .show-counter{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px;font-size:12px;color:var(--faint);font-weight:600;letter-spacing:.04em}
+  .show-counter b{color:var(--blue-l);font-weight:800}
+  .show-dots{display:flex;gap:7px;justify-content:center;margin-top:16px;flex-wrap:wrap;padding:0 24px}
+  .show-dots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--border2);cursor:pointer;transition:background .2s,transform .2s,width .2s;padding:0}
+  .show-dots button:hover{background:var(--faint)}
+  .show-dots button.on{background:var(--blue);width:22px;border-radius:4px}
+  .shot{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .shot img{display:block;width:100%;cursor:zoom-in;border-bottom:1px solid var(--border)}
   .shot figcaption{font-size:12.5px;color:var(--muted);padding:12px 16px}
-  .shot.big img{aspect-ratio:auto;max-height:520px}
+  .shot.big img{max-height:520px;object-fit:contain}
   .roi-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center}
   .roi-grid .pts{list-style:none}
   .roi-grid .pts li{padding:6px 0;color:var(--muted);font-size:15px}
@@ -86,8 +132,12 @@
 
   /* ── Sections ────────────────────────────────────────────────────────── */
   section{padding:90px 0}
+  .band{position:relative;background:linear-gradient(180deg,rgba(18,18,34,.55),rgba(11,11,24,.55));border-top:1px solid var(--border);border-bottom:1px solid var(--border);backdrop-filter:blur(2px)}
+  .band-top{border-bottom:none}
   .sec-head{text-align:center;max-width:680px;margin:0 auto 56px}
-  .sec-eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-l);margin-bottom:14px}
+  .sec-eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-l);margin-bottom:14px;display:inline-flex;align-items:center;gap:12px}
+  .sec-head .sec-eyebrow::before,.sec-head .sec-eyebrow::after{content:'';width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--blue))}
+  .sec-head .sec-eyebrow::after{background:linear-gradient(90deg,var(--blue),transparent)}
   h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.01em;line-height:1.2;margin-bottom:14px}
   .sec-sub{color:var(--muted);font-size:16px}
 
@@ -102,7 +152,7 @@
   /* ── Pipeline ────────────────────────────────────────────────────────── */
   .pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
   .pipe-step{position:relative;padding:0 18px;text-align:center}
-  .pipe-num{width:44px;height:44px;border-radius:50%;background:var(--card);border:2px solid var(--blue);color:var(--blue-l);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:2}
+  .pipe-num{width:48px;height:48px;border-radius:50%;background:radial-gradient(circle at 50% 35%,rgba(59,130,246,.18),var(--card));border:2px solid var(--blue);color:var(--blue-l);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:2;box-shadow:0 0 0 6px rgba(59,130,246,.06),0 6px 18px rgba(59,130,246,.22)}
   .pipe-step::before{content:'';position:absolute;top:22px;left:calc(-50% + 22px);width:calc(100% - 44px);height:2px;background:linear-gradient(90deg,var(--border2),var(--blue));opacity:.5}
   .pipe-step:first-child::before{display:none}
   .pipe-step h3{font-size:16px;font-weight:700;margin-bottom:8px}
@@ -112,16 +162,19 @@
 
   /* ── Features ────────────────────────────────────────────────────────── */
   .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .feat{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;transition:border-color .2s,transform .2s}
-  .feat:hover{border-color:rgba(59,130,246,.45);transform:translateY(-3px)}
-  .feat .ico{font-size:24px;margin-bottom:14px}
+  .feat{position:relative;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;transition:border-color .2s,transform .2s,box-shadow .2s;overflow:hidden}
+  .feat::before{content:'';position:absolute;inset:0;border-radius:14px;padding:1px;background:linear-gradient(160deg,rgba(59,130,246,.5),transparent 40%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .25s;pointer-events:none}
+  .feat:hover{border-color:rgba(59,130,246,.45);transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.4)}
+  .feat:hover::before{opacity:1}
+  .feat .ico{font-size:26px;margin-bottom:14px;display:inline-flex;width:48px;height:48px;align-items:center;justify-content:center;border-radius:12px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.16)}
   .feat h3{font-size:16px;font-weight:700;margin-bottom:8px}
   .feat p{font-size:13.5px;color:var(--muted)}
   .feat .tag{display:inline-block;margin-left:8px;font-size:9px;font-weight:800;letter-spacing:.08em;color:var(--amber);background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:99px;padding:2px 8px;vertical-align:middle}
 
   /* ── Trial ───────────────────────────────────────────────────────────── */
   .trial-card{background:linear-gradient(160deg,var(--card) 0%,#0d1322 100%);border:1px solid rgba(59,130,246,.3);border-radius:20px;padding:56px;display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center;position:relative;overflow:hidden}
-  .trial-card::after{content:'';position:absolute;right:-120px;top:-120px;width:340px;height:340px;background:radial-gradient(circle,rgba(59,130,246,.14),transparent 70%)}
+  .trial-card::after{content:'';position:absolute;right:-120px;top:-120px;width:340px;height:340px;background:radial-gradient(circle,rgba(139,92,246,.16),transparent 70%)}
+  .trial-card::before{content:'';position:absolute;left:-120px;bottom:-140px;width:320px;height:320px;background:radial-gradient(circle,rgba(34,211,238,.10),transparent 70%);pointer-events:none}
   .trial-card h2{margin-bottom:16px}
   .trial-card .pts{list-style:none;margin-top:22px}
   .trial-card .pts li{padding:7px 0;color:var(--muted);font-size:15px}
@@ -132,8 +185,10 @@
 
   /* ── IT strip ────────────────────────────────────────────────────────── */
   .it-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .it-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px}
-  .it-item h4{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--text)}
+  .it-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;transition:border-color .2s,transform .2s,box-shadow .2s}
+  .it-item:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.34)}
+  .it-item h4{font-size:14px;font-weight:700;margin-bottom:6px;color:var(--text);display:flex;align-items:center;gap:8px}
+  .it-item h4::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px rgba(52,211,153,.6)}
   .it-item p{font-size:13px;color:var(--muted)}
 
   /* ── Contact / footer ────────────────────────────────────────────────── */
@@ -147,26 +202,37 @@
 
   /* ── Reveal animation ────────────────────────────────────────────────── */
   .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
-  .rv.in{opacity:1;transform:none}
+  .rv.in{opacity:1;transform:none;will-change:auto}
+  img{image-rendering:-webkit-optimize-contrast;image-rendering:high-quality}
 
   @media (max-width:900px){
-    .mock-body,.stats-grid{grid-template-columns:repeat(2,1fr)}
+    .mock-body{grid-template-columns:repeat(2,1fr)}
     .feat-grid,.it-grid{grid-template-columns:1fr 1fr}
-    .shot-grid{grid-template-columns:1fr 1fr}
     .roi-grid{grid-template-columns:1fr}
     .pipe{grid-template-columns:1fr 1fr;gap:34px 0}
     .pipe-step:nth-child(3)::before{display:none}
     .trial-card{grid-template-columns:1fr;padding:38px}
     .nav-links a:not(.btn){display:none}
+    .show-prev{left:8px}.show-next{right:8px}
   }
   @media (max-width:600px){
-    .feat-grid,.it-grid,.pipe,.shot-grid{grid-template-columns:1fr}
+    .feat-grid,.it-grid,.pipe{grid-template-columns:1fr}
     .pipe-step::before{display:none}
     section{padding:64px 0}
+    .show-slide figcaption{padding:16px 18px 18px}
+    .show-slide figcaption .show-title{font-size:17px}
+    .show-arrow{width:38px;height:38px;font-size:17px}
+    #toTop{right:16px;bottom:16px;width:42px;height:42px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+    .rv{opacity:1;transform:none}
   }
 </style>
 </head>
 <body>
+
+<div id="progress"></div>
 
 <nav>
   <div class="nav-in">
@@ -177,7 +243,7 @@
       <a href="#features">Features</a>
       <a href="#trial">Free trial</a>
       <a href="#it">For IT</a>
-      <a class="btn btn-primary" href="#contact">Book a demo</a>
+      <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download free</a>
     </div>
   </div>
 </nav>
@@ -189,31 +255,18 @@
     <h1>From SolidWorks assembly to sorted, stamped, <span class="hl">nest&#8209;ready drawings</span> in minutes.</h1>
     <p class="sub">DraftX automates the slow, error-prone work between design release and the shop floor &mdash; validated job packs, batch PDF &amp; DXF export, AI drawing sorting, QC reporting and Lantek-ready nesting.</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="#contact">Book a 15-minute demo</a>
-      <a class="btn btn-ghost" href="#trial">Start a free trial</a>
+      <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX free</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
     </div>
-    <div class="hero-note">Runs on your machines. Your drawings never leave your network.</div>
+    <div class="hero-note">30-day trial built in &mdash; no key, no card. Install, click <b style="color:var(--text);font-weight:600">Start free trial</b>, and the guided tour does the rest. Runs on your machines; your drawings never leave your network.</div>
 
     <!-- Real app screenshot — QC Report, all gates green -->
     <div class="mock rv">
       <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-      <img class="mock-img" src="screenshots/qc.png" alt="DraftX QC Report — every pipeline gate green, part-by-part DXF coverage, ready for nesting" onclick="lbOpen(this)"/>
+      <img class="mock-img" src="screenshots/qc-report.png" alt="DraftX QC Report — every pipeline gate green, part-by-part DXF coverage, ready for nesting" onclick="lbOpen(this)"/>
     </div>
   </div>
 </header>
-
-<!-- STATS -->
-<div class="stats-band">
-  <div class="wrap">
-    <div class="stats-grid rv">
-      <div><div class="stat-big amber">&pound;24.3k</div><div class="stat-cap">labour saved, measured in-app</div></div>
-      <div><div class="stat-big green">405 hrs</div><div class="stat-cap">of drawing-office time given back</div></div>
-      <div><div class="stat-big">50.7</div><div class="stat-cap">working days saved</div></div>
-      <div><div class="stat-big">28.9k</div><div class="stat-cap">parts processed automatically</div></div>
-    </div>
-    <div class="stats-note">Real figures from DraftX Analytics in production at a UK steel fabrication company &mdash; tracked live, per job, per user, per week.</div>
-  </div>
-</div>
 
 <!-- HOW IT WORKS -->
 <section id="how">
@@ -257,19 +310,33 @@
       <h2>Real screens, real job</h2>
       <p class="sec-sub">Captured from a live production job &mdash; a 1600&times;600 de-stoner, 105 parts, assembly to nest-ready in one sitting.</p>
     </div>
-    <div class="shot-grid">
-      <figure class="shot rv"><img loading="lazy" src="screenshots/jobpack.png" alt="Job Pack validation report" onclick="lbOpen(this)"/><figcaption>Job Pack &mdash; 232 components scanned, every gap flagged before export</figcaption></figure>
-      <figure class="shot rv"><img loading="lazy" src="screenshots/sort.png" alt="AI drawing sorting" onclick="lbOpen(this)"/><figcaption>AI Sort &mdash; 105 parts classified by operation, 89.7% rolling accuracy</figcaption></figure>
-      <figure class="shot rv"><img loading="lazy" src="screenshots/drwreview.png" alt="Drawing review" onclick="lbOpen(this)"/><figcaption>Drawing Review &mdash; every sorted drawing, one click from SolidWorks</figcaption></figure>
-      <figure class="shot rv"><img loading="lazy" src="screenshots/jcard.png" alt="Auto-generated job card" onclick="lbOpen(this)"/><figcaption>Job Card &mdash; branded, auto-filled from CAD, live preview</figcaption></figure>
-      <figure class="shot rv"><img loading="lazy" src="screenshots/nestx.png" alt="NestX Lantek job preparation" onclick="lbOpen(this)"/><figcaption>NestX &mdash; sorted DXFs straight into a Lantek-ready job</figcaption></figure>
-      <figure class="shot rv"><img loading="lazy" src="screenshots/print.png" alt="Batch print queue" onclick="lbOpen(this)"/><figcaption>Batch Print &mdash; full drawing sets by operation, one click</figcaption></figure>
+    <div class="show rv">
+      <button class="show-arrow show-prev" onclick="showPrev()" aria-label="Previous">&#8592;</button>
+      <div class="show-track" id="showTrack">
+        <figure class="show-slide" data-step="01" data-title="Welcome"><img loading="lazy" src="screenshots/welcome.png" alt="DraftX welcome screen" onclick="lbOpen(this)"/><figcaption><b>Welcome</b><span class="show-title">Pick up where you left off</span><span>Jump straight to the active job — DraftX remembers where you were.</span></figcaption></figure>
+        <figure class="show-slide" data-step="02" data-title="Jobs"><img loading="lazy" src="screenshots/job-numbers.png" alt="Jobs tab" onclick="lbOpen(this)"/><figcaption><b>Jobs</b><span class="show-title">One source of truth</span><span>Every live and archived job in one place — set the active job, every other tab follows.</span></figcaption></figure>
+        <figure class="show-slide" data-step="03" data-title="Job Pack"><img loading="lazy" src="screenshots/job-pack.png" alt="Job Pack validation report" onclick="lbOpen(this)"/><figcaption><b>Job Pack</b><span class="show-title">Assembly scanned, gaps flagged</span><span>Validates every part against your conventions before anything is exported.</span></figcaption></figure>
+        <figure class="show-slide" data-step="04" data-title="Batch Export"><img loading="lazy" src="screenshots/batch-export.png" alt="Batch Export tab" onclick="lbOpen(this)"/><figcaption><b>Batch Export</b><span class="show-title">PDFs and DXFs in one run</span><span>The whole job exported, named, stamped and filed automatically.</span></figcaption></figure>
+        <figure class="show-slide" data-step="05" data-title="Sort Drawings"><img loading="lazy" src="screenshots/sort-drawings.png" alt="AI drawing sorting" onclick="lbOpen(this)"/><figcaption><b>Sort Drawings</b><span class="show-title">AI classifies every drawing</span><span>Laser, folding, fabrication, bought-out — sorted by operation, never silently wrong.</span></figcaption></figure>
+        <figure class="show-slide" data-step="06" data-title="Drawing Review"><img loading="lazy" src="screenshots/drawing-review.png" alt="Drawing review" onclick="lbOpen(this)"/><figcaption><b>Drawing Review</b><span class="show-title">Flick through every sheet</span><span>Full-screen, keyboard-driven — like leafing through a job pack, without the printing.</span></figcaption></figure>
+        <figure class="show-slide" data-step="07" data-title="DXF Editor"><img loading="lazy" src="screenshots/dxf-editor.png" alt="Built-in DXF editor" onclick="lbOpen(this)"/><figcaption><b>DXF Editor</b><span class="show-title">Tidy flats without a CAD round-trip</span><span>CAD-grade snapping and measuring, with hand-edits protected from re-exports.</span></figcaption></figure>
+        <figure class="show-slide" data-step="08" data-title="QC Report"><img loading="lazy" src="screenshots/qc-report.png" alt="QC Report tab" onclick="lbOpen(this)"/><figcaption><b>QC Report</b><span class="show-title">Provably complete, before release</span><span>Every part, every PDF, every DXF — cross-checked against the BOM. All green or it doesn't ship.</span></figcaption></figure>
+        <figure class="show-slide" data-step="09" data-title="Job Card"><img loading="lazy" src="screenshots/job-card.png" alt="Auto-generated job card" onclick="lbOpen(this)"/><figcaption><b>Job Card</b><span class="show-title">Branded, auto-filled, one click</span><span>Customer, description, units and snapshot pulled straight from CAD with a live preview.</span></figcaption></figure>
+        <figure class="show-slide" data-step="10" data-title="Batch Print"><img loading="lazy" src="screenshots/batch-print.png" alt="Batch print queue" onclick="lbOpen(this)"/><figcaption><b>Batch Print</b><span class="show-title">Full drawing sets, one click</span><span>The laser pack, the folding pack, the fab pack — printed in minutes not hours.</span></figcaption></figure>
+        <figure class="show-slide" data-step="11" data-title="NestX"><img loading="lazy" src="screenshots/nest-x.png" alt="NestX Lantek job preparation" onclick="lbOpen(this)"/><figcaption><b>NestX</b><span class="show-title">Straight into Lantek</span><span>Sorted DXFs become a nest-ready Lantek job — material, thickness and quantities included.</span></figcaption></figure>
+        <figure class="show-slide" data-step="12" data-title="Guided Mode"><img loading="lazy" src="screenshots/guided-tour-1.png" alt="Guided mode walkthrough" onclick="lbOpen(this)"/><figcaption><b>Guided Mode</b><span class="show-title">No wrong turns</span><span>Tabs unlock in workflow order, with a clear next-step prompt at every stage.</span></figcaption></figure>
+        <figure class="show-slide" data-step="13" data-title="Guided Tour"><img loading="lazy" src="screenshots/guided-tour-2.png" alt="Guided tour overlay" onclick="lbOpen(this)"/><figcaption><b>Guided Tour</b><span class="show-title">A 3-minute walkthrough, anytime</span><span>Spotlight every screen, every button, in the order you'll use them. Built into the help menu.</span></figcaption></figure>
+        <figure class="show-slide" data-step="14" data-title="Settings"><img loading="lazy" src="screenshots/settings.png" alt="Settings tab" onclick="lbOpen(this)"/><figcaption><b>Settings</b><span class="show-title">Tune to your shop, set once</span><span>Folders, naming, branding, AI provider, Lantek connection — sensible defaults, fully configurable.</span></figcaption></figure>
+      </div>
+      <button class="show-arrow show-next" onclick="showNext()" aria-label="Next">&#8594;</button>
+      <div class="show-counter"><span><b id="showIdx">1</b> of <span id="showTotal">14</span></span><span id="showLabel">Welcome</span></div>
+      <div class="show-dots" id="showDots"></div>
     </div>
   </div>
 </section>
 
 <!-- ROI -->
-<section id="roi" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<section id="roi" class="band">
   <div class="wrap">
     <div class="roi-grid rv">
       <div>
@@ -289,7 +356,7 @@
 </section>
 
 <!-- FEATURES -->
-<section id="features" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<section id="features" class="band">
   <div class="wrap">
     <div class="sec-head rv">
       <div class="sec-eyebrow">Features</div>
@@ -316,18 +383,18 @@
       <div>
         <div class="sec-eyebrow">Free trial</div>
         <h2>Try DraftX on your own jobs</h2>
-        <p class="sec-sub">Full access for your team, on your drawings, with your conventions. No card, no commitment &mdash; and your data stays exactly where it is if you decide not to continue.</p>
+        <p class="sec-sub">Download, install, and click <b style="color:var(--text);font-weight:600">Start free trial</b> &mdash; no key to request, no card, no sales call. Full access on your drawings, with your conventions, and your data stays exactly where it is if you decide not to continue.</p>
         <ul class="pts">
           <li>Every feature unlocked, including NestX</li>
           <li>Installed on your machines &mdash; nothing uploaded</li>
-          <li>We help you set up your first job pack</li>
+          <li>Guided tour walks you through your first job</li>
           <li>Live countdown in-app, no surprise cut-off</li>
         </ul>
       </div>
       <div class="trial-side">
         <div class="trial-days">30</div>
         <div class="trial-days-cap">days, full access</div>
-        <a class="btn btn-primary" href="#contact">Request a trial key</a>
+        <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX free</a>
       </div>
     </div>
   </div>
@@ -346,23 +413,24 @@
       <div class="it-item"><h4>Simple licensing</h4><p>Machine-bound keys validated against our license service over HTTPS &mdash; the only outbound connection &mdash; with a 72-hour offline grace period.</p></div>
     </div>
     <div class="rv" style="text-align:center;margin-top:34px">
-      <a class="btn btn-ghost" href="https://draftx-license-server-production.up.railway.app/download/latest">&#11015; Download DraftX for Windows</a>
+      <a class="btn btn-ghost" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX for Windows</a>
       <div class="hero-note" style="margin-top:12px">Always the latest version. Installs in minutes &mdash; you'll need a license or trial key to activate. New here? Follow the <a href="quickstart.html">quick start guide</a>.</div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" style="background:var(--bg2);border-top:1px solid var(--border)">
+<section id="contact" class="band band-top">
   <div class="wrap contact">
     <div class="sec-head rv" style="margin-bottom:30px">
       <div class="sec-eyebrow">Get started</div>
       <h2>See it on your own drawings</h2>
-      <p class="sec-sub">A 15-minute screen share is all it takes. Bring a recent job &mdash; we'll show you what DraftX would have done with it.</p>
+      <p class="sec-sub">Download DraftX, click <b style="color:var(--text);font-weight:600">Start free trial</b>, and run a recent job through it &mdash; the guided tour walks you through every step. Prefer a walkthrough first? We're happy to show you.</p>
     </div>
     <div class="rv">
-      <a class="btn btn-primary" href="mailto:sales@opusag.co.uk?subject=DraftX%20demo%20request">Book a demo &mdash; sales@opusag.co.uk</a>
-      <div class="hero-note" style="margin-top:16px">Or request a 30-day trial key in the same email.</div>
+      <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX free</a>
+      <a class="btn btn-ghost" href="mailto:sales@opusag.co.uk?subject=DraftX%20demo%20request" style="margin-left:10px">Book a demo</a>
+      <div class="hero-note" style="margin-top:16px">No key to request &mdash; the 30-day trial is built into the app.</div>
     </div>
   </div>
 </section>
@@ -381,6 +449,8 @@
   </div>
 </footer>
 
+<button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">&#8593;</button>
+
 <div id="lightbox" onclick="this.style.display='none'"><img id="lightboxImg" alt=""/></div>
 
 <script>
@@ -390,14 +460,93 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
+  // Scroll progress bar, sticky-nav state, back-to-top
+  const progress = document.getElementById('progress');
+  const navEl = document.querySelector('nav');
+  const toTop = document.getElementById('toTop');
+  function onScroll() {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    progress.style.width = pct + '%';
+    navEl.classList.toggle('scrolled', h.scrollTop > 8);
+    toTop.classList.toggle('show', h.scrollTop > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Active nav link based on section in view
+  const navLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+  const sectionMap = navLinks
+    .map(a => ({ a, sec: document.querySelector(a.getAttribute('href')) }))
+    .filter(x => x.sec);
+  if (sectionMap.length) {
+    const secObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const m = sectionMap.find(x => x.sec === e.target);
+          if (m) m.a.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sectionMap.forEach(x => secObs.observe(x.sec));
+  }
+
   // Lightbox
   function lbOpen(img) {
     const lb = document.getElementById('lightbox');
     document.getElementById('lightboxImg').src = img.src;
     lb.style.display = 'flex';
   }
+
+  // Slideshow
+  const showTrack = document.getElementById('showTrack');
+  const showSlides = showTrack ? Array.from(showTrack.querySelectorAll('.show-slide')) : [];
+  const showDots = document.getElementById('showDots');
+  const showIdxEl = document.getElementById('showIdx');
+  const showLabelEl = document.getElementById('showLabel');
+  let _showCur = 0;
+  if (showTrack && showSlides.length) {
+    document.getElementById('showTotal').textContent = showSlides.length;
+    showSlides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', 'Slide ' + (i + 1));
+      b.onclick = () => showGo(i);
+      if (i === 0) b.classList.add('on');
+      showDots.appendChild(b);
+    });
+    const slideObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.intersectionRatio > 0.55) {
+          const i = showSlides.indexOf(e.target);
+          if (i < 0) return;
+          _showCur = i;
+          showDots.querySelectorAll('button').forEach((d, j) => d.classList.toggle('on', j === i));
+          showIdxEl.textContent = i + 1;
+          showLabelEl.textContent = e.target.dataset.title || '';
+          document.querySelector('.show-prev').disabled = i === 0;
+          document.querySelector('.show-next').disabled = i === showSlides.length - 1;
+        }
+      });
+    }, { root: showTrack, threshold: [0.55] });
+    showSlides.forEach(s => slideObs.observe(s));
+  }
+  function showGo(i) {
+    if (!showSlides[i]) return;
+    showSlides[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+  function showNext() { showGo(Math.min(_showCur + 1, showSlides.length - 1)); }
+  function showPrev() { showGo(Math.max(_showCur - 1, 0)); }
+
   document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') document.getElementById('lightbox').style.display = 'none';
+    const lb = document.getElementById('lightbox');
+    if (e.key === 'Escape') { lb.style.display = 'none'; return; }
+    if (lb.style.display === 'flex') return;
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea') return;
+    if (e.key === 'ArrowRight') { showNext(); }
+    if (e.key === 'ArrowLeft')  { showPrev(); }
   });
 </script>
 </body>
