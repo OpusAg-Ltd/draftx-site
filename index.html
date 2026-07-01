@@ -5,8 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>DraftX — From SolidWorks assembly to nest-ready drawings in minutes</title>
 <meta name="description" content="DraftX automates the drawing office: validated job packs, batch PDF/DXF export, AI drawing sorting, QC reports and Lantek-ready nesting — straight from your SolidWorks assembly."/>
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml"/>
+<link rel="canonical" href="https://draftx.opusag.co.uk/"/>
+<meta name="theme-color" content="#06060e"/>
+
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="DraftX"/>
+<meta property="og:title" content="DraftX — From SolidWorks assembly to nest-ready drawings in minutes"/>
+<meta property="og:description" content="Validated job packs, batch PDF/DXF export, AI drawing sorting, QC reports and Lantek-ready nesting — straight from your SolidWorks assembly."/>
+<meta property="og:image" content="https://draftx.opusag.co.uk/screenshots/qc-report.png"/>
+<meta property="og:image:width" content="3839"/>
+<meta property="og:image:height" content="2159"/>
+<meta property="og:url" content="https://draftx.opusag.co.uk/"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="DraftX — From SolidWorks assembly to nest-ready drawings in minutes"/>
+<meta name="twitter:description" content="Validated job packs, batch PDF/DXF export, AI drawing sorting, QC reports and Lantek-ready nesting — straight from your SolidWorks assembly."/>
+<meta name="twitter:image" content="https://draftx.opusag.co.uk/screenshots/qc-report.png"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"/>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
   :root{
     --bg:#06060e; --bg2:#0b0b18; --card:#11111f; --card2:#181830;
     --border:#21213c; --border2:#30304e;
@@ -245,7 +266,7 @@
       <a href="#features">Features</a>
       <a href="#trial">Free trial</a>
       <a href="#it">For IT</a>
-      <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download free</a>
+      <a class="btn btn-primary" href="https://draftx.opusag.co.uk/download/latest">Download free</a>
     </div>
   </div>
 </nav>
@@ -257,7 +278,7 @@
     <h1>From SolidWorks assembly to sorted, stamped, <span class="hl">nest&#8209;ready drawings</span> in minutes.</h1>
     <p class="sub">DraftX automates the slow, error-prone work between design release and the shop floor &mdash; validated job packs, batch PDF &amp; DXF export, AI drawing sorting, QC reporting and Lantek-ready nesting.</p>
     <div class="hero-ctas">
-      <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX free</a>
+      <a class="btn btn-primary" href="https://draftx.opusag.co.uk/download/latest">Download DraftX free</a>
       <a class="btn btn-ghost" href="#how">See how it works</a>
     </div>
     <div class="hero-note">30-day trial built in &mdash; no key, no card. Install, click <b style="color:var(--text);font-weight:600">Start free trial</b>, and the guided tour does the rest. Runs on your machines; your drawings never leave your network.</div>
@@ -265,7 +286,7 @@
     <!-- Real app screenshot — QC Report, all gates green -->
     <div class="mock rv">
       <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-      <picture><source media="(max-width:900px)" srcset="screenshots/qc-report-1280.png"/><img class="mock-img" decoding="async" src="screenshots/qc-report.png" data-full="screenshots/qc-report.png" alt="DraftX QC Report — every pipeline gate green, part-by-part DXF coverage, ready for nesting" onclick="lbOpen(this)"/></picture>
+      <picture><source media="(max-width:900px)" srcset="screenshots/qc-report-1280.png"/><img class="mock-img" decoding="async" width="3839" height="2159" src="screenshots/qc-report.png" data-full="screenshots/qc-report.png" alt="DraftX QC Report — every pipeline gate green, part-by-part DXF coverage, ready for nesting" onclick="lbOpen(this)"/></picture>
     </div>
   </div>
 </header>
@@ -315,20 +336,20 @@
     <div class="show rv">
       <button class="show-arrow show-prev" onclick="showPrev()" aria-label="Previous">&#8592;</button>
       <div class="show-track" id="showTrack">
-        <figure class="show-slide" data-step="01" data-title="Welcome"><picture><source media="(max-width:900px)" srcset="screenshots/welcome-1280.png"/><img loading="lazy" decoding="async" src="screenshots/welcome.png" data-full="screenshots/welcome.png" alt="DraftX welcome screen" onclick="lbOpen(this)"/></picture><figcaption><b>Welcome</b><span class="show-title">Pick up where you left off</span><span>Jump straight to the active job — DraftX remembers where you were.</span></figcaption></figure>
-        <figure class="show-slide" data-step="02" data-title="Jobs"><picture><source media="(max-width:900px)" srcset="screenshots/job-numbers-1280.png"/><img loading="lazy" decoding="async" src="screenshots/job-numbers.png" data-full="screenshots/job-numbers.png" alt="Jobs tab" onclick="lbOpen(this)"/></picture><figcaption><b>Jobs</b><span class="show-title">One source of truth</span><span>Every live and archived job in one place — set the active job, every other tab follows.</span></figcaption></figure>
-        <figure class="show-slide" data-step="03" data-title="Job Pack"><picture><source media="(max-width:900px)" srcset="screenshots/job-pack-1280.png"/><img loading="lazy" decoding="async" src="screenshots/job-pack.png" data-full="screenshots/job-pack.png" alt="Job Pack validation report" onclick="lbOpen(this)"/></picture><figcaption><b>Job Pack</b><span class="show-title">Assembly scanned, gaps flagged</span><span>Validates every part against your conventions before anything is exported.</span></figcaption></figure>
-        <figure class="show-slide" data-step="04" data-title="Batch Export"><picture><source media="(max-width:900px)" srcset="screenshots/batch-export-1280.png"/><img loading="lazy" decoding="async" src="screenshots/batch-export.png" data-full="screenshots/batch-export.png" alt="Batch Export tab" onclick="lbOpen(this)"/></picture><figcaption><b>Batch Export</b><span class="show-title">PDFs and DXFs in one run</span><span>The whole job exported, named, stamped and filed automatically.</span></figcaption></figure>
-        <figure class="show-slide" data-step="05" data-title="Sort Drawings"><picture><source media="(max-width:900px)" srcset="screenshots/sort-drawings-1280.png"/><img loading="lazy" decoding="async" src="screenshots/sort-drawings.png" data-full="screenshots/sort-drawings.png" alt="AI drawing sorting" onclick="lbOpen(this)"/></picture><figcaption><b>Sort Drawings</b><span class="show-title">AI classifies every drawing</span><span>Laser, folding, fabrication, bought-out — sorted by operation, never silently wrong.</span></figcaption></figure>
-        <figure class="show-slide" data-step="06" data-title="Drawing Review"><picture><source media="(max-width:900px)" srcset="screenshots/drawing-review-1280.png"/><img loading="lazy" decoding="async" src="screenshots/drawing-review.png" data-full="screenshots/drawing-review.png" alt="Drawing review" onclick="lbOpen(this)"/></picture><figcaption><b>Drawing Review</b><span class="show-title">Flick through every sheet</span><span>Full-screen, keyboard-driven — like leafing through a job pack, without the printing.</span></figcaption></figure>
-        <figure class="show-slide" data-step="07" data-title="DXF Editor"><picture><source media="(max-width:900px)" srcset="screenshots/dxf-editor-1280.png"/><img loading="lazy" decoding="async" src="screenshots/dxf-editor.png" data-full="screenshots/dxf-editor.png" alt="Built-in DXF editor" onclick="lbOpen(this)"/></picture><figcaption><b>DXF Editor</b><span class="show-title">Tidy flats without a CAD round-trip</span><span>CAD-grade snapping and measuring, with hand-edits protected from re-exports.</span></figcaption></figure>
-        <figure class="show-slide" data-step="08" data-title="QC Report"><picture><source media="(max-width:900px)" srcset="screenshots/qc-report-1280.png"/><img loading="lazy" decoding="async" src="screenshots/qc-report.png" data-full="screenshots/qc-report.png" alt="QC Report tab" onclick="lbOpen(this)"/></picture><figcaption><b>QC Report</b><span class="show-title">Provably complete, before release</span><span>Every part, every PDF, every DXF — cross-checked against the BOM. All green or it doesn't ship.</span></figcaption></figure>
-        <figure class="show-slide" data-step="09" data-title="Job Card"><picture><source media="(max-width:900px)" srcset="screenshots/job-card-1280.png"/><img loading="lazy" decoding="async" src="screenshots/job-card.png" data-full="screenshots/job-card.png" alt="Auto-generated job card" onclick="lbOpen(this)"/></picture><figcaption><b>Job Card</b><span class="show-title">Branded, auto-filled, one click</span><span>Customer, description, units and snapshot pulled straight from CAD with a live preview.</span></figcaption></figure>
-        <figure class="show-slide" data-step="10" data-title="Batch Print"><picture><source media="(max-width:900px)" srcset="screenshots/batch-print-1280.png"/><img loading="lazy" decoding="async" src="screenshots/batch-print.png" data-full="screenshots/batch-print.png" alt="Batch print queue" onclick="lbOpen(this)"/></picture><figcaption><b>Batch Print</b><span class="show-title">Full drawing sets, one click</span><span>The laser pack, the folding pack, the fab pack — printed in minutes not hours.</span></figcaption></figure>
-        <figure class="show-slide" data-step="11" data-title="NestX"><picture><source media="(max-width:900px)" srcset="screenshots/nest-x-1280.png"/><img loading="lazy" decoding="async" src="screenshots/nest-x.png" data-full="screenshots/nest-x.png" alt="NestX Lantek job preparation" onclick="lbOpen(this)"/></picture><figcaption><b>NestX</b><span class="show-title">Straight into Lantek</span><span>Sorted DXFs become a nest-ready Lantek job — material, thickness and quantities included.</span></figcaption></figure>
-        <figure class="show-slide" data-step="12" data-title="Guided Mode"><picture><source media="(max-width:900px)" srcset="screenshots/guided-tour-1-1280.png"/><img loading="lazy" decoding="async" src="screenshots/guided-tour-1.png" data-full="screenshots/guided-tour-1.png" alt="Guided mode walkthrough" onclick="lbOpen(this)"/></picture><figcaption><b>Guided Mode</b><span class="show-title">No wrong turns</span><span>Tabs unlock in workflow order, with a clear next-step prompt at every stage.</span></figcaption></figure>
-        <figure class="show-slide" data-step="13" data-title="Guided Tour"><picture><source media="(max-width:900px)" srcset="screenshots/guided-tour-2-1280.png"/><img loading="lazy" decoding="async" src="screenshots/guided-tour-2.png" data-full="screenshots/guided-tour-2.png" alt="Guided tour overlay" onclick="lbOpen(this)"/></picture><figcaption><b>Guided Tour</b><span class="show-title">A 3-minute walkthrough, anytime</span><span>Spotlight every screen, every button, in the order you'll use them. Built into the help menu.</span></figcaption></figure>
-        <figure class="show-slide" data-step="14" data-title="Settings"><picture><source media="(max-width:900px)" srcset="screenshots/settings-1280.png"/><img loading="lazy" decoding="async" src="screenshots/settings.png" data-full="screenshots/settings.png" alt="Settings tab" onclick="lbOpen(this)"/></picture><figcaption><b>Settings</b><span class="show-title">Tune to your shop, set once</span><span>Folders, naming, branding, AI provider, Lantek connection — sensible defaults, fully configurable.</span></figcaption></figure>
+        <figure class="show-slide" data-step="01" data-title="Welcome"><picture><source media="(max-width:900px)" srcset="screenshots/welcome-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/welcome.png" data-full="screenshots/welcome.png" alt="DraftX welcome screen" onclick="lbOpen(this)"/></picture><figcaption><b>Welcome</b><span class="show-title">Pick up where you left off</span><span>Jump straight to the active job — DraftX remembers where you were.</span></figcaption></figure>
+        <figure class="show-slide" data-step="02" data-title="Jobs"><picture><source media="(max-width:900px)" srcset="screenshots/job-numbers-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/job-numbers.png" data-full="screenshots/job-numbers.png" alt="Jobs tab" onclick="lbOpen(this)"/></picture><figcaption><b>Jobs</b><span class="show-title">One source of truth</span><span>Every live and archived job in one place — set the active job, every other tab follows.</span></figcaption></figure>
+        <figure class="show-slide" data-step="03" data-title="Job Pack"><picture><source media="(max-width:900px)" srcset="screenshots/job-pack-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/job-pack.png" data-full="screenshots/job-pack.png" alt="Job Pack validation report" onclick="lbOpen(this)"/></picture><figcaption><b>Job Pack</b><span class="show-title">Assembly scanned, gaps flagged</span><span>Validates every part against your conventions before anything is exported.</span></figcaption></figure>
+        <figure class="show-slide" data-step="04" data-title="Batch Export"><picture><source media="(max-width:900px)" srcset="screenshots/batch-export-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/batch-export.png" data-full="screenshots/batch-export.png" alt="Batch Export tab" onclick="lbOpen(this)"/></picture><figcaption><b>Batch Export</b><span class="show-title">PDFs and DXFs in one run</span><span>The whole job exported, named, stamped and filed automatically.</span></figcaption></figure>
+        <figure class="show-slide" data-step="05" data-title="Sort Drawings"><picture><source media="(max-width:900px)" srcset="screenshots/sort-drawings-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/sort-drawings.png" data-full="screenshots/sort-drawings.png" alt="AI drawing sorting" onclick="lbOpen(this)"/></picture><figcaption><b>Sort Drawings</b><span class="show-title">AI classifies every drawing</span><span>Laser, folding, fabrication, bought-out — sorted by operation, never silently wrong.</span></figcaption></figure>
+        <figure class="show-slide" data-step="06" data-title="Drawing Review"><picture><source media="(max-width:900px)" srcset="screenshots/drawing-review-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/drawing-review.png" data-full="screenshots/drawing-review.png" alt="Drawing review" onclick="lbOpen(this)"/></picture><figcaption><b>Drawing Review</b><span class="show-title">Flick through every sheet</span><span>Full-screen, keyboard-driven — like leafing through a job pack, without the printing.</span></figcaption></figure>
+        <figure class="show-slide" data-step="07" data-title="DXF Editor"><picture><source media="(max-width:900px)" srcset="screenshots/dxf-editor-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/dxf-editor.png" data-full="screenshots/dxf-editor.png" alt="Built-in DXF editor" onclick="lbOpen(this)"/></picture><figcaption><b>DXF Editor</b><span class="show-title">Tidy flats without a CAD round-trip</span><span>CAD-grade snapping and measuring, with hand-edits protected from re-exports.</span></figcaption></figure>
+        <figure class="show-slide" data-step="08" data-title="QC Report"><picture><source media="(max-width:900px)" srcset="screenshots/qc-report-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/qc-report.png" data-full="screenshots/qc-report.png" alt="QC Report tab" onclick="lbOpen(this)"/></picture><figcaption><b>QC Report</b><span class="show-title">Provably complete, before release</span><span>Every part, every PDF, every DXF — cross-checked against the BOM. All green or it doesn't ship.</span></figcaption></figure>
+        <figure class="show-slide" data-step="09" data-title="Job Card"><picture><source media="(max-width:900px)" srcset="screenshots/job-card-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/job-card.png" data-full="screenshots/job-card.png" alt="Auto-generated job card" onclick="lbOpen(this)"/></picture><figcaption><b>Job Card</b><span class="show-title">Branded, auto-filled, one click</span><span>Customer, description, units and snapshot pulled straight from CAD with a live preview.</span></figcaption></figure>
+        <figure class="show-slide" data-step="10" data-title="Batch Print"><picture><source media="(max-width:900px)" srcset="screenshots/batch-print-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/batch-print.png" data-full="screenshots/batch-print.png" alt="Batch print queue" onclick="lbOpen(this)"/></picture><figcaption><b>Batch Print</b><span class="show-title">Full drawing sets, one click</span><span>The laser pack, the folding pack, the fab pack — printed in minutes not hours.</span></figcaption></figure>
+        <figure class="show-slide" data-step="11" data-title="NestX"><picture><source media="(max-width:900px)" srcset="screenshots/nest-x-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/nest-x.png" data-full="screenshots/nest-x.png" alt="NestX Lantek job preparation" onclick="lbOpen(this)"/></picture><figcaption><b>NestX</b><span class="show-title">Straight into Lantek</span><span>Sorted DXFs become a nest-ready Lantek job — material, thickness and quantities included.</span></figcaption></figure>
+        <figure class="show-slide" data-step="12" data-title="Guided Mode"><picture><source media="(max-width:900px)" srcset="screenshots/guided-tour-1-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/guided-tour-1.png" data-full="screenshots/guided-tour-1.png" alt="Guided mode walkthrough" onclick="lbOpen(this)"/></picture><figcaption><b>Guided Mode</b><span class="show-title">No wrong turns</span><span>Tabs unlock in workflow order, with a clear next-step prompt at every stage.</span></figcaption></figure>
+        <figure class="show-slide" data-step="13" data-title="Guided Tour"><picture><source media="(max-width:900px)" srcset="screenshots/guided-tour-2-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/guided-tour-2.png" data-full="screenshots/guided-tour-2.png" alt="Guided tour overlay" onclick="lbOpen(this)"/></picture><figcaption><b>Guided Tour</b><span class="show-title">A 3-minute walkthrough, anytime</span><span>Spotlight every screen, every button, in the order you'll use them. Built into the help menu.</span></figcaption></figure>
+        <figure class="show-slide" data-step="14" data-title="Settings"><picture><source media="(max-width:900px)" srcset="screenshots/settings-1280.png"/><img loading="lazy" decoding="async" width="3839" height="2159" src="screenshots/settings.png" data-full="screenshots/settings.png" alt="Settings tab" onclick="lbOpen(this)"/></picture><figcaption><b>Settings</b><span class="show-title">Tune to your shop, set once</span><span>Folders, naming, branding, AI provider, Lantek connection — sensible defaults, fully configurable.</span></figcaption></figure>
       </div>
       <button class="show-arrow show-next" onclick="showNext()" aria-label="Next">&#8594;</button>
       <div class="show-counter"><span><b id="showIdx">1</b> of <span id="showTotal">14</span></span><span id="showLabel">Welcome</span></div>
@@ -352,7 +373,7 @@
           <li>Benchmarks you can tune to your own shop</li>
         </ul>
       </div>
-      <figure class="shot big rv"><picture><source media="(max-width:900px)" srcset="screenshots/analytics-1280.png"/><img loading="lazy" decoding="async" src="screenshots/analytics.png" data-full="screenshots/analytics.png" alt="DraftX Analytics — hours and pounds saved" onclick="lbOpen(this)"/></picture><figcaption>Analytics &mdash; real production data, not projections</figcaption></figure>
+      <figure class="shot big rv"><picture><source media="(max-width:900px)" srcset="screenshots/analytics-1280.png"/><img loading="lazy" decoding="async" width="3820" height="1681" src="screenshots/analytics.png" data-full="screenshots/analytics.png" alt="DraftX Analytics — hours and pounds saved" onclick="lbOpen(this)"/></picture><figcaption>Analytics &mdash; real production data, not projections</figcaption></figure>
     </div>
   </div>
 </section>
@@ -396,7 +417,7 @@
       <div class="trial-side">
         <div class="trial-days">30</div>
         <div class="trial-days-cap">days, full access</div>
-        <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX free</a>
+        <a class="btn btn-primary" href="https://draftx.opusag.co.uk/download/latest">Download DraftX free</a>
       </div>
     </div>
   </div>
@@ -412,10 +433,10 @@
     <div class="it-grid rv">
       <div class="it-item"><h4>Your data stays put</h4><p>DraftX runs locally against your SolidWorks installation and network folders. Drawings, models and job data never leave your network.</p></div>
       <div class="it-item"><h4>Minimal footprint</h4><p>Windows desktop app. Requires SolidWorks on the machine for export features. No server to host, no database to manage.</p></div>
-      <div class="it-item"><h4>Simple licensing</h4><p>Machine-bound keys validated against our license service over HTTPS &mdash; the only outbound connection &mdash; with a 72-hour offline grace period.</p></div>
+      <div class="it-item"><h4>Simple licensing</h4><p>Machine-bound keys, validated over a single encrypted connection &mdash; with a short offline grace period so travel or a network blip never stops work mid-job.</p></div>
     </div>
     <div class="rv" style="text-align:center;margin-top:34px">
-      <a class="btn btn-ghost" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX for Windows</a>
+      <a class="btn btn-ghost" href="https://draftx.opusag.co.uk/download/latest">Download DraftX for Windows</a>
       <div class="hero-note" style="margin-top:12px">Always the latest version. Installs in minutes &mdash; you'll need a license or trial key to activate. New here? Follow the <a href="quickstart.html">quick start guide</a>.</div>
     </div>
   </div>
@@ -430,7 +451,7 @@
       <p class="sec-sub">Download DraftX, click <b style="color:var(--text);font-weight:600">Start free trial</b>, and run a recent job through it &mdash; the guided tour walks you through every step. Prefer a walkthrough first? We're happy to show you.</p>
     </div>
     <div class="rv">
-      <a class="btn btn-primary" href="https://draftx-license-server-production.up.railway.app/download/latest">Download DraftX free</a>
+      <a class="btn btn-primary" href="https://draftx.opusag.co.uk/download/latest">Download DraftX free</a>
       <a class="btn btn-ghost" href="mailto:sales@opusag.co.uk?subject=DraftX%20demo%20request" style="margin-left:10px">Book a demo</a>
       <div class="hero-note" style="margin-top:16px">No key to request &mdash; the 30-day trial is built into the app.</div>
     </div>
@@ -442,7 +463,7 @@
     <span class="wordmark" style="font-size:16px">Draft<b>X</b></span>
     <span>&copy; 2026 OpusAg Ltd. All rights reserved.</span>
     <div class="foot-links">
-      <a href="https://draftx-license-server-production.up.railway.app/download/latest">Download</a>
+      <a href="https://draftx.opusag.co.uk/download/latest">Download</a>
       <a href="quickstart.html">Quick start</a>
       <a href="privacy.html">Privacy policy</a>
       <a href="eula.html">License agreement</a>
