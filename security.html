@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Data Security &amp; AI Overview — DraftX</title>
+<meta name="description" content="Where DraftX data lives, how the AI sorting works, and what OpusAg does and doesn't hold. A one-page overview for IT and management."/>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  :root{
+    --bg:#07070f; --bg2:#0a0a14; --card:#0e0e1a; --card2:#12121f;
+    --border:#1e1e38; --border2:#2a2a4a;
+    --text:#e2e8f0; --muted:#94a3b8; --faint:#64748b;
+    --blue:#3b82f6; --blue-d:#2563eb; --blue-l:#60a5fa;
+    --green:#34d399;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.7}
+  a{color:var(--blue-l);text-decoration:none}
+  a:hover{text-decoration:underline}
+  nav{position:sticky;top:0;z-index:100;background:rgba(7,7,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav-in{display:flex;align-items:center;gap:28px;padding:16px 24px;max-width:1140px;margin:0 auto}
+  .wordmark{font-size:22px;font-weight:800;letter-spacing:.04em;color:var(--text)}
+  .wordmark b{color:var(--blue)}
+  .nav-links{margin-left:auto;display:flex;gap:24px}
+  .nav-links a{color:var(--muted);font-size:14px;font-weight:500}
+  .doc{max-width:820px;margin:0 auto;padding:70px 24px 90px}
+  .doc h1{font-size:34px;font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+  .doc .meta{color:var(--faint);font-size:14px;margin-bottom:42px}
+  .doc h2{font-size:21px;font-weight:700;margin:42px 0 14px;color:var(--text)}
+  .doc p{color:var(--muted);margin-bottom:14px}
+  .doc ul{color:var(--muted);margin:0 0 14px 22px}
+  .doc li{margin-bottom:8px}
+  .doc strong{color:var(--text)}
+  .callout{background:var(--card);border:1px solid var(--border2);border-left:3px solid var(--green);border-radius:10px;padding:18px 22px;margin:26px 0}
+  .callout p{margin-bottom:6px}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border:1px solid var(--border);color:var(--muted);vertical-align:top}
+  th{background:var(--card);color:var(--text);font-weight:600}
+  footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;color:var(--faint);font-size:14px}
+  @media print{
+    body{background:#fff;color:#111}
+    nav,footer{display:none}
+    .doc{padding:0;max-width:none}
+    .doc h1,.doc h2,.doc strong,th{color:#111}
+    .doc p,.doc li,td{color:#333}
+    .callout{background:#f4f7f4;border-color:#cdd;border-left-color:#2a9}
+    th{background:#eee}
+    th,td{border-color:#ccc}
+    a{color:#111}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="index.html" class="wordmark">Draft<b>X</b></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="mailto:sales@opusag.co.uk">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="doc">
+  <h1>Data Security &amp; AI Overview</h1>
+  <div class="meta">OpusAg Ltd &middot; July 2026 &middot; The one-page answer to "where does our data go?"</div>
+
+  <div class="callout">
+    <p><strong>In one paragraph:</strong> DraftX runs on your machines and your network. Your CAD models, drawings and job files stay on your servers &mdash; OpusAg holds no copy of any of it. The AI sorting step sends a rendered image of each drawing, in memory only, through our broker to AWS's London data centre for classification and back; nothing is stored, logged, or used to train models anywhere along that path. The only data OpusAg keeps is what's needed to run your licence: contact details, licence keys, machine fingerprints and usage counts.</p>
+  </div>
+
+  <h2>1. Where your engineering data lives</h2>
+  <ul>
+    <li><strong>CAD models, drawings, PDFs, DXFs, job folders:</strong> your machines and your network shares. DraftX reads and writes them locally; they are never uploaded to OpusAg.</li>
+    <li><strong>Job records and operator names:</strong> stored in the analytics files inside your own job folders, on your server, under your control.</li>
+    <li><strong>Customer names, pricing, commercial data:</strong> never transmitted. DraftX has no telemetry that reads file contents.</li>
+  </ul>
+
+  <h2>2. How the AI drawing sorting works</h2>
+  <p>The AI sort classifies each drawing (assembly, sheet-metal part, machined part, etc.) so packs collate themselves. The data path is deliberately narrow:</p>
+  <table>
+    <tr><th>Step</th><th>What moves</th><th>Where</th></tr>
+    <tr><td>1. Your PC &rarr; OpusAg broker</td><td>Rendered drawing image + filename + OCR text, over TLS</td><td>OpusAg licence server (in-memory pass-through)</td></tr>
+    <tr><td>2. Broker &rarr; AWS Bedrock</td><td>Same payload, forwarded unchanged</td><td>AWS London region (eu-west-2), EU inference profile</td></tr>
+    <tr><td>3. Bedrock &rarr; your PC</td><td>The classification answer</td><td>Returned through the broker, unmodified</td></tr>
+  </table>
+  <ul>
+    <li><strong>Nothing is stored.</strong> The broker keeps the request in memory for the duration of the call only. We record token counts per job for quota &mdash; never images, text, or answers.</li>
+    <li><strong>Nothing is trained on.</strong> AWS Bedrock does not retain prompts or completions and does not use them to train models, under AWS's service terms.</li>
+    <li><strong>UK/EU residency.</strong> Inference stays within UK/EU AWS regions via an EU cross-region inference profile.</li>
+    <li><strong>No keys on your machines.</strong> Your PCs hold no AI credentials; access is authenticated by your DraftX licence and revocable per machine.</li>
+    <li><strong>Optional.</strong> The feature can be disabled; DraftX falls back to non-AI sorting.</li>
+  </ul>
+
+  <h2>3. What OpusAg holds about you</h2>
+  <table>
+    <tr><th>Data</th><th>Why</th></tr>
+    <tr><td>Contact name, business email, company name</td><td>Issuing and administering your licence or trial</td></tr>
+    <tr><td>Licence key, type, expiry</td><td>Licence administration</td></tr>
+    <tr><td>Machine fingerprint (one-way hash) and machine name</td><td>Per-machine licensing; the hash cannot be reversed into hardware details</td></tr>
+    <tr><td>Validation logs and AI usage counts (token totals per job)</td><td>Security, support, and quota</td></tr>
+  </table>
+  <p>That's the complete list. Full detail, retention periods, and your UK GDPR rights are in the <a href="privacy.html">privacy policy</a>.</p>
+
+  <h2>4. Application security</h2>
+  <ul>
+    <li><strong>Code-signed Windows installer</strong> with automatic updates delivered over HTTPS from GitHub Releases.</li>
+    <li><strong>All traffic encrypted</strong> in transit (HTTPS/TLS) &mdash; licence checks, AI calls, updates.</li>
+    <li><strong>Licences are cryptographically signed</strong> (Ed25519) and bound per machine; the server can revoke any machine remotely.</li>
+    <li><strong>No inbound connections:</strong> DraftX only makes outbound calls to the licence server and update host. Nothing on your network is exposed.</li>
+  </ul>
+
+  <h2>5. Questions</h2>
+  <p>If your IT or compliance team wants more depth &mdash; sub-processor list, data-flow diagrams, or contractual terms &mdash; email <a href="mailto:sales@opusag.co.uk">sales@opusag.co.uk</a> and we'll walk them through it.</p>
+</div>
+
+<footer>&copy; 2026 OpusAg Ltd &middot; <a href="index.html">draftx home</a> &middot; <a href="privacy.html">privacy policy</a> &middot; <a href="eula.html">license agreement</a></footer>
+
+</body>
+</html>

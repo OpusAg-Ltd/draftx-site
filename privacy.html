@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Privacy Policy — DraftX</title>
-<meta name="description" content="DraftX privacy policy. Your drawings never leave your site — we collect only what's needed to run licensing."/>
+<meta name="description" content="DraftX privacy policy. Drawings are processed locally; AI sorting runs in-memory via AWS Bedrock (London region) and is never stored. We collect only what's needed to run licensing."/>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
   :root{
@@ -55,12 +55,12 @@
 
 <div class="doc">
   <h1>Privacy Policy</h1>
-  <div class="meta">OpusAg Ltd &middot; Effective 11 June 2026 &middot; Version 1.0</div>
+  <div class="meta">OpusAg Ltd &middot; Effective 14 July 2026 &middot; Version 1.1</div>
 
   <div class="callout">
     <p><strong>The short version:</strong></p>
-    <p>&bull; <strong>OpusAg never receives your drawings or CAD data.</strong> DraftX processes them locally on your machines. We hold no copy.</p>
-    <p>&bull; If you enable the optional AI drawing sorting feature, drawing images go directly from your machines to <strong>your own</strong> AI provider account (Anthropic or AWS Bedrock) &mdash; see section 3. They still never pass through OpusAg.</p>
+    <p>&bull; <strong>OpusAg never stores your drawings or CAD data.</strong> DraftX processes them locally on your machines. We hold no copy.</p>
+    <p>&bull; The AI drawing sorting feature runs on <strong>AWS Bedrock in the London region (eu-west-2)</strong>, brokered by OpusAg. Drawing images are processed in-memory only &mdash; nothing is stored, logged, or used to train models &mdash; see section 3.</p>
     <p>&bull; We collect the minimum needed to run licensing: contact details, licence keys, machine fingerprints and validation logs.</p>
     <p>&bull; We don't sell data, we don't advertise, and the app contains no tracking.</p>
   </div>
@@ -77,16 +77,17 @@
     <tr><td>Validation logs (key, machine, timestamp, IP)</td><td>OpusAg licence server</td><td>Security and support troubleshooting (legitimate interest)</td></tr>
     <tr><td>Operator usernames in job records</td><td><strong>Locally only</strong> &mdash; your machines and network</td><td>So your team can see who processed which drawings. Not transmitted to OpusAg; your organisation controls this data</td></tr>
   </table>
-  <p>DraftX does <strong>not</strong> transmit to OpusAg: drawings, CAD models, PDFs, job data, customer lists, pricing, or any file contents.</p>
+  <p>DraftX does <strong>not</strong> store with OpusAg: drawings, CAD models, PDFs, job data, customer lists, pricing, or any file contents. The one case where drawing content transits our infrastructure is the AI sorting call described in section 3 &mdash; in memory, for the duration of the request only, never written to disk or logs.</p>
 
-  <h2>3. Optional AI drawing sorting</h2>
-  <p>DraftX includes an optional AI classification feature for sorting drawings. It is off until you configure it with <strong>your own credentials</strong>:</p>
+  <h2>3. AI drawing sorting</h2>
+  <p>DraftX includes an AI classification feature for sorting drawings, provided as a managed service. How it works and where the data goes:</p>
   <ul>
-    <li>When enabled, DraftX sends a <strong>rendered image of each drawing</strong>, plus its filename, OCR text and basic part metadata, to the AI provider <strong>you</strong> configure: either <strong>Anthropic</strong> (direct API) or <strong>AWS Bedrock</strong>, using your own API key / AWS account.</li>
-    <li>The data flows <strong>directly from your machines to your provider account</strong>. It never passes through, and is never visible to, OpusAg.</li>
-    <li>Engineering drawings can contain personal data in title blocks (e.g. "drawn by" names). For that data, your organisation is the controller and your chosen AI provider is your processor under your agreement with them.</li>
-    <li><strong>Data residency:</strong> the AWS Bedrock option defaults to the London region (eu-west-2) with an EU inference profile, keeping processing inside UK/EU AWS regions. The direct Anthropic API processes data in the United States. Choose the option that matches your requirements.</li>
-    <li>Both providers' commercial terms state that API inputs are not used to train models. The feature can be disabled at any time, and DraftX falls back to non-AI sorting methods.</li>
+    <li>When you run an AI sort, DraftX sends a <strong>rendered image of each drawing</strong>, plus its filename, OCR text and basic part metadata, to the OpusAg licence server, which forwards it to <strong>AWS Bedrock</strong> (Anthropic Claude models) for classification.</li>
+    <li><strong>Pass-through only:</strong> the OpusAg server holds the request in memory for the duration of the call and forwards the model's answer back to your machine. We do not store, log, or retain drawing images, OCR text, or model responses &mdash; the only records kept are usage metadata (token counts per job) for quota and billing.</li>
+    <li><strong>Data residency:</strong> inference runs in the AWS London region (eu-west-2) using an EU cross-region inference profile, so processing stays inside UK/EU AWS regions.</li>
+    <li><strong>No training:</strong> AWS Bedrock does not retain prompts or completions and does not use them to train models, under AWS's service terms.</li>
+    <li>Engineering drawings can contain personal data in title blocks (e.g. "drawn by" names). For that data, your organisation is the controller; OpusAg Ltd and AWS act as processors, per the summary in section 6.</li>
+    <li>The feature can be disabled at any time, and DraftX falls back to non-AI sorting methods.</li>
   </ul>
 
   <h2>4. Where it's stored</h2>
@@ -99,8 +100,15 @@
     <li>Expired trial records: 12 months after expiry unless converted to a paid licence.</li>
   </ul>
 
-  <h2>6. Sharing</h2>
-  <p>We never sell or rent personal data. We share it only with hosting providers acting as processors under contract, professional advisers where necessary, and authorities where required by law.</p>
+  <h2>6. Sharing and sub-processors</h2>
+  <p>We never sell or rent personal data. We share it only with the processors below (under contract), professional advisers where necessary, and authorities where required by law.</p>
+  <table>
+    <tr><th>Processor</th><th>Purpose</th><th>Location</th></tr>
+    <tr><td>Railway</td><td>Licence server hosting (contact details, licence records, validation logs)</td><td>EU/US &mdash; see section 7</td></tr>
+    <tr><td>Amazon Web Services (Bedrock)</td><td>AI drawing classification &mdash; transient inference only, nothing retained</td><td>London (eu-west-2) / EU regions</td></tr>
+    <tr><td>GitHub</td><td>Installer downloads and update delivery</td><td>United States</td></tr>
+    <tr><td>Stripe</td><td>Payment processing and invoicing (if you purchase)</td><td>EU/US under its own safeguards</td></tr>
+  </table>
 
   <h2>7. International transfers</h2>
   <p>Where our hosting providers (Railway, GitHub) process data outside the UK/EEA (for example in the United States), transfers rely on the UK International Data Transfer Agreement, the UK&ndash;US Data Bridge, or equivalent safeguards in those providers' terms.</p>
