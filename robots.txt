@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /buy/
+
+Sitemap: https://draftx.opusag.co.uk/sitemap.xml
